@@ -17,7 +17,7 @@ public class VitaminSalad extends Salad{
 	}
 
 	@Override
-	protected Map<Vegetable, Double> prepareSaladIngredients() {
+	protected Map<Vegetable, Double> prepareSaladVegetables() {
 		Map<Vegetable, Double> greekSaladIngredients = new TreeMap<>();
 		greekSaladIngredients.put(new Carrot("Ordinar carrot", 52), 2.0);
 		greekSaladIngredients.put(new Cucumber("Ordinar cucumber", 16), 2.0);

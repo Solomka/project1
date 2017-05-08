@@ -1,14 +1,14 @@
 package ua.training.chef.model.salad;
 
-public class SaladIngredient<T> {
+public class SaladIngredient<T extends Comparable<T>> implements Comparable<SaladIngredient<T>> {
 
 	private T ingredient;
-	private double quantity;
+	private double weight;
 
 	public SaladIngredient(T ingredient, double quantity) {
-		super();
+	
 		this.ingredient = ingredient;
-		this.quantity = quantity;
+		this.weight = quantity;
 	}
 
 	public T getIngredient() {
@@ -19,12 +19,17 @@ public class SaladIngredient<T> {
 		this.ingredient = ingredient;
 	}
 
-	public double getQuantity() {
-		return quantity;
+	public double getWeight() {
+		return weight;
 	}
 
-	public void setQuantity(double quantity) {
-		this.quantity = quantity;
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	@Override
+	public int compareTo(SaladIngredient<T> o) {
+		return ingredient.compareTo(o.getIngredient());
 	}
 
 }

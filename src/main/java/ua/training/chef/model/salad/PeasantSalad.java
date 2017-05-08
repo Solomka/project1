@@ -16,7 +16,7 @@ public class PeasantSalad extends Salad {
 	}
 
 	@Override
-	protected Map<Vegetable, Double> prepareSaladIngredients() {
+	protected Map<Vegetable, Double> prepareSaladVegetables() {
 		Map<Vegetable, Double> greekSaladIngredients = new TreeMap<>();
 		greekSaladIngredients.put(new Radish("Red radish", 19), 7.0);
 		greekSaladIngredients.put(new Lettuce("Ordinar lettuce", 34), 2.0);

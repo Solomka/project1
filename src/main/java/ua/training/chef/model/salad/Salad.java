@@ -1,41 +1,50 @@
 package ua.training.chef.model.salad;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import ua.training.chef.model.vegetable.Vegetable;
+import ua.training.chef.model.vegetable.VegetableConstant;
 
 public abstract class Salad {
 
-	private Map<Vegetable, Double> vegetables;
+	private Set<SaladIngredient<Vegetable>> vegetables;
 
 	public Salad() {
-		this.vegetables = prepareSaladIngredients();
+		this.vegetables = prepareSaladVegetables();
 	}
 
-	abstract protected Map<Vegetable, Double> prepareSaladIngredients();
+	abstract protected Set<SaladIngredient<Vegetable>> prepareSaladVegetables();
 
-	public Map<Vegetable, Double> getSortedSaladVegetables() {
-		return vegetables;
+	public List<SaladIngredient<Vegetable>> getSortedSaladVegetables() {
+
+		List<SaladIngredient<Vegetable>> vegetablesList = new ArrayList<>(vegetables);
+		Collections.sort(vegetablesList);
+
+		return vegetablesList;
 	}
 
 	public double getSaladCaloric() {
 		double generalSaladCaloric = 0.0;
 
-		for (Vegetable vegetable : vegetables.keySet()) {
-			generalSaladCaloric += (vegetable.getCaloric() * vegetables.get(vegetable));
+		for (SaladIngredient<Vegetable> vegetable : vegetables) {
+			generalSaladCaloric += (vegetable.getIngredient().getCaloric() * vegetable.getWeight())
+					/ VegetableConstant.VEG_CALORIC_VALUE_PRICE_GRAM_MEASURE;
 		}
 		return generalSaladCaloric;
 	}
 
-	public Map<Vegetable, Double> getVegetablesInCaloricRange(double minCaloricValue, double maxCaloricValue) {
-		Map<Vegetable, Double> vegetablesInCalloricRange = new TreeMap<Vegetable, Double>();
-		
-		for (Vegetable vegetable : vegetables.keySet()) {
-			if (vegetable.getCaloric() >= minCaloricValue && vegetable.getCaloric() <= maxCaloricValue) {
-				vegetablesInCalloricRange.put(vegetable, vegetables.get(vegetable));
+	public List<Vegetable> getVegetablesInCaloricRange(double minCaloricValue, double maxCaloricValue) {
+		List<Vegetable> vegetablesList = new ArrayList<>();
+
+		for (SaladIngredient<Vegetable> vegetable : vegetables) {
+			if (vegetable.getIngredient().getCaloric() >= minCaloricValue
+					&& vegetable.getIngredient().getCaloric() <= maxCaloricValue) {
+				vegetablesList.add(vegetable.getIngredient());
 			}
 		}
-		return vegetablesInCalloricRange;
+		return vegetablesList;
 	}
 }
