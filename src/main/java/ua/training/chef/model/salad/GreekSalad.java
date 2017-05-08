@@ -19,10 +19,12 @@ public class GreekSalad extends Salad {
 	@Override
 	protected Map<Vegetable, Double> prepareSaladIngredients() {
 		Map<Vegetable, Double> greekSaladIngredients = new TreeMap<>();
+		
 		greekSaladIngredients.put(new Tomato("Cherry tomato", 32), 5.0);
 		greekSaladIngredients.put(new Pepper("Green pepper", 30), 2.0);
 		greekSaladIngredients.put(new Olive("Green olive", 117), 100.0);
 		greekSaladIngredients.put(new Cucumber("Ordinar cucumber", 16), 2.0);
+		
 		return greekSaladIngredients;
 	}
 

@@ -1,13 +1,16 @@
 package ua.training.chef.model.vegetable;
 
-public abstract class Vegetable implements Comparable<Vegetable> {
+public abstract class Vegetable implements Comparable<Vegetable> {	
 
 	private String type;
 	private double caloric;
+	private double price;
 
-	public Vegetable(String type, double caloric) {
+	public Vegetable(String type, double caloric, double price) {
+		super();
 		this.type = type;
 		this.caloric = caloric;
+		this.price = price;
 	}
 
 	public String getType() {
@@ -18,6 +21,10 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 		return caloric;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
 	public int compareTo(Vegetable another) {
 		if (caloric == another.caloric) {
 			return 0;
@@ -25,10 +32,4 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 		return (caloric > another.caloric) ? 1 : -1;
 	}
 
-	@Override
-	public String toString() {
-		return "Vegetable {\ntype=" + type + ", \ncaloric=" + caloric + "}";
-	}
-	
-	
 }

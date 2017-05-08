@@ -2,8 +2,7 @@ package ua.training.chef.service;
 
 import java.util.Map;
 
-import ua.training.chef.factory.FactoryManager;
-import ua.training.chef.factory.SaladFactory;
+import ua.training.chef.model.factory.SaladFactory;
 import ua.training.chef.model.salad.Salad;
 import ua.training.chef.model.vegetable.Vegetable;
 

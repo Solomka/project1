@@ -1,4 +1,4 @@
-package ua.training.chef.factory;
+package ua.training.chef.model.factory;
 
 import ua.training.chef.model.salad.PeasantSalad;
 import ua.training.chef.model.salad.Salad;
