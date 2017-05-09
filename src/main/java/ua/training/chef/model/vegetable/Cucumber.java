@@ -4,7 +4,6 @@ public class Cucumber extends Vegetable {
 
 	public Cucumber(String type, double caloric, double price) {
 		super(type, caloric, price);
-		// TODO Auto-generated constructor stub
 	}
 
 }

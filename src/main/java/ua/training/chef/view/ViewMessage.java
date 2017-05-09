@@ -15,7 +15,8 @@ public interface ViewMessage {
 	public String BYE = "Come again! BYE!";
 	
 	public String READY_INFO = " salad is ready! Bon appetit!";
-	public String CALORIFIC_VALUE = "General salad calorific value: ";
+	public String CALORIFIC_VALUE = "General salad caloric value: ";
+	public String PRICE = "General salad price: ";
 	
 	public String MIN_CALORIC_VALUE = "Type min vegetable caloric value: ";
 	public String MAX_CALORIC_VALUE = "Type max vegetable caloric value: ";

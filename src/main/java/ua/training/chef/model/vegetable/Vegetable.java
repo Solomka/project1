@@ -32,4 +32,11 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 		return (caloric > another.caloric) ? 1 : -1;
 	}
 
+	@Override
+	public String toString() {
+		return "Vegetable [\ntype=" + type + ",\n caloric=" + caloric + ",\n price=" + price + "]";
+	}
+	
+	
+
 }

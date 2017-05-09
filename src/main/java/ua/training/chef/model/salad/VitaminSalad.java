@@ -1,29 +1,28 @@
 package ua.training.chef.model.salad;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import ua.training.chef.model.vegetable.Carrot;
 import ua.training.chef.model.vegetable.Cucumber;
 import ua.training.chef.model.vegetable.Lettuce;
 import ua.training.chef.model.vegetable.Onion;
-import ua.training.chef.model.vegetable.Vegetable;
 
-public class VitaminSalad extends Salad{
+public class VitaminSalad extends Salad {
 
 	public VitaminSalad() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected Map<Vegetable, Double> prepareSaladVegetables() {
-		Map<Vegetable, Double> greekSaladIngredients = new TreeMap<>();
-		greekSaladIngredients.put(new Carrot("Ordinar carrot", 52), 2.0);
-		greekSaladIngredients.put(new Cucumber("Ordinar cucumber", 16), 2.0);
-		greekSaladIngredients.put(new Lettuce("Ordinar lettuce", 34), 2.0);
-		greekSaladIngredients.put(new Onion("White onion", 67), 0.5);		
+	protected Set<VegetableSaladIngredient> prepareSaladVegetables() {
+		Set<VegetableSaladIngredient> greekSaladIngredients = new HashSet<>();		
+		
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Carrot("Flaccus carrot", 65.2, 20), 100));
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Cucumber("Ordinar cucumber", 15.5, 10), 70));
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Lettuce("Iceberg lettuce", 14.8, 17), 40));
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Onion("Leek onion", 60.9, 9.5), 15));
+		
 		return greekSaladIngredients;
 	}
-
 }

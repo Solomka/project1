@@ -1,13 +1,12 @@
 package ua.training.chef.model.salad;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import ua.training.chef.model.vegetable.Cucumber;
 import ua.training.chef.model.vegetable.Olive;
 import ua.training.chef.model.vegetable.Pepper;
 import ua.training.chef.model.vegetable.Tomato;
-import ua.training.chef.model.vegetable.Vegetable;
 
 public class GreekSalad extends Salad {
 
@@ -17,15 +16,14 @@ public class GreekSalad extends Salad {
 	}
 
 	@Override
-	protected Map<Vegetable, Double> prepareSaladVegetables() {
-		Map<Vegetable, Double> greekSaladIngredients = new TreeMap<>();
-		
-		greekSaladIngredients.put(new Tomato("Cherry tomato", 32), 5.0);
-		greekSaladIngredients.put(new Pepper("Green pepper", 30), 2.0);
-		greekSaladIngredients.put(new Olive("Green olive", 117), 100.0);
-		greekSaladIngredients.put(new Cucumber("Ordinar cucumber", 16), 2.0);
-		
+	protected Set<VegetableSaladIngredient> prepareSaladVegetables() {
+		Set<VegetableSaladIngredient> greekSaladIngredients = new HashSet<>();
+
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Cucumber("Ordinar cucumber", 15.5, 10), 70));
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Tomato("Cherry tomatoes", 18, 30), 85));
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Olive("Black olive", 115, 80), 100));
+		greekSaladIngredients.add(new VegetableSaladIngredient(new Pepper("Green bell pepper", 20.1, 25), 45));
+
 		return greekSaladIngredients;
 	}
-
 }

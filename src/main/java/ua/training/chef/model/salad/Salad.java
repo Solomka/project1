@@ -10,17 +10,17 @@ import ua.training.chef.model.vegetable.VegetableConstant;
 
 public abstract class Salad {
 
-	private Set<SaladIngredient<Vegetable>> vegetables;
+	private Set<VegetableSaladIngredient> vegetables;
 
 	public Salad() {
 		this.vegetables = prepareSaladVegetables();
 	}
 
-	abstract protected Set<SaladIngredient<Vegetable>> prepareSaladVegetables();
+	abstract protected Set<VegetableSaladIngredient> prepareSaladVegetables();
 
-	public List<SaladIngredient<Vegetable>> getSortedSaladVegetables() {
+	public List<VegetableSaladIngredient> getSortedSaladVegetables() {
 
-		List<SaladIngredient<Vegetable>> vegetablesList = new ArrayList<>(vegetables);
+		List<VegetableSaladIngredient> vegetablesList = new ArrayList<>(vegetables);
 		Collections.sort(vegetablesList);
 
 		return vegetablesList;
@@ -29,22 +29,40 @@ public abstract class Salad {
 	public double getSaladCaloric() {
 		double generalSaladCaloric = 0.0;
 
-		for (SaladIngredient<Vegetable> vegetable : vegetables) {
+		for (VegetableSaladIngredient vegetable : vegetables) {
 			generalSaladCaloric += (vegetable.getIngredient().getCaloric() * vegetable.getWeight())
-					/ VegetableConstant.VEG_CALORIC_VALUE_PRICE_GRAM_MEASURE;
+					/ VegetableConstant.VEG_CALORIC_VALUE_GRAM_MEASURE;
 		}
 		return generalSaladCaloric;
 	}
+	
+	public double getSaladPrice(){
+		double generalSaladPrice = 0.0;
 
-	public List<Vegetable> getVegetablesInCaloricRange(double minCaloricValue, double maxCaloricValue) {
-		List<Vegetable> vegetablesList = new ArrayList<>();
+		for (VegetableSaladIngredient vegetable : vegetables) {
+			generalSaladPrice += (vegetable.getIngredient().getPrice() * vegetable.getWeight())
+					/ VegetableConstant.VEG_PRICE_GRAM_MEASURE;
+		}
+		return generalSaladPrice;		
+	}
 
-		for (SaladIngredient<Vegetable> vegetable : vegetables) {
+	public List<VegetableSaladIngredient> getVegetablesInCaloricRange(double minCaloricValue, double maxCaloricValue) {
+		List<VegetableSaladIngredient> vegetablesList = new ArrayList<>();
+
+		for (VegetableSaladIngredient vegetable : vegetables) {
 			if (vegetable.getIngredient().getCaloric() >= minCaloricValue
 					&& vegetable.getIngredient().getCaloric() <= maxCaloricValue) {
-				vegetablesList.add(vegetable.getIngredient());
+				vegetablesList.add(vegetable);
 			}
 		}
 		return vegetablesList;
 	}
+
+	@Override
+	public String toString() {
+		return "Salad [\n vegetables=" + vegetables + "]";
+	}
+	
+	
+	
 }

@@ -1,9 +1,11 @@
 package ua.training.chef.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import ua.training.chef.model.salad.Salad;
+import ua.training.chef.model.salad.VegetableSaladIngredient;
 import ua.training.chef.model.vegetable.Vegetable;
 import ua.training.chef.service.SaladCreationServiceImpl;
 import ua.training.chef.view.View;
@@ -47,8 +49,7 @@ public class SaladController {
 						RegexContainer.CALORIC_RANGE_REGEX))))) {
 			view.printWrongInput();
 		}
-		Map<Vegetable, Double> vegetablesInCaloricRange = saladCreationService.findVegetablesInCaloricRange(salad,
-				Double.parseDouble(minCaloricValue), Double.parseDouble(maxCaloricValue));
+		List<VegetableSaladIngredient> vegetablesInCaloricRange = salad.getVegetablesInCaloricRange(Double.parseDouble(minCaloricValue), Double.parseDouble(maxCaloricValue));
 		view.printSaladVegetables(vegetablesInCaloricRange);
 	}
 
