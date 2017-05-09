@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import ua.training.chef.constants.IngredientConstant;
 import ua.training.chef.model.dressing.Dressing;
@@ -32,12 +33,8 @@ public abstract class Salad {
 		return vegetables;
 	}
 	
-	public Set<SortableSaladIngredient<Vegetable>> getSortedSaladVegetables() {
-
-		List<SortableSaladIngredient<Vegetable>> vegetablesList = new ArrayList<>(vegetables);
-		Collections.sort(vegetablesList);
-
-		return new HashSet<>(vegetablesList);
+	public Set<SortableSaladIngredient<Vegetable>> getSortedSaladVegetables() {		
+		return new TreeSet<>(vegetables);
 	}
 	
 	public Set<SortableSaladIngredient<Vegetable>> getVegetablesInCaloriesRange(double minCaloriesValue,
@@ -45,8 +42,8 @@ public abstract class Salad {
 		Set<SortableSaladIngredient<Vegetable>> vegetablesInCaloriesRange = new HashSet<>();
 
 		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
-			if (vegetable.getIngredient().getCaloric() >= minCaloriesValue
-					&& vegetable.getIngredient().getCaloric() <= maxCaloriesValue) {
+			if (vegetable.getIngredient().getCalories() >= minCaloriesValue
+					&& vegetable.getIngredient().getCalories() <= maxCaloriesValue) {
 				vegetablesInCaloriesRange.add(vegetable);
 			}
 		}
@@ -70,7 +67,7 @@ public abstract class Salad {
 		double vegetablesCalories = 0.0;
 
 		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
-			vegetablesCalories += (vegetable.getIngredient().getCaloric() * vegetable.getWeight())
+			vegetablesCalories += (vegetable.getIngredient().getCalories() * vegetable.getWeight())
 					/ IngredientConstant.CALORIC_VALUE_GRAM_MEASURE;
 		}
 		
@@ -81,7 +78,7 @@ public abstract class Salad {
 		double dressingsCalories = 0.0;
 		
 		for (SaladIngredient<Dressing> dressing : dressings) {
-			dressingsCalories += (dressing.getIngredient().getCaloric() * dressing.getWeight())
+			dressingsCalories += (dressing.getIngredient().getCalories() * dressing.getWeight())
 					/ IngredientConstant.CALORIC_VALUE_MILLILITER_MEASURE;
 		}
 		
@@ -118,10 +115,5 @@ public abstract class Salad {
 							new BigDecimal(IngredientConstant.PRICE_MILLILITER_MEASURE), MathContext.DECIMAL64));
 		}		
 		return dressingsPrice;		
-	}
-
-	@Override
-	public String toString() {
-		return "Salad [\n vegetables=" + vegetables + "]";
-	}
+	}	
 }

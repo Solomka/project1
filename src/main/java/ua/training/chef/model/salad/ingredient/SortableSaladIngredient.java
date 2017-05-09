@@ -11,5 +11,4 @@ public class SortableSaladIngredient<T extends Comparable<T>> extends SaladIngre
 	public int compareTo(SortableSaladIngredient<T> o) {
 		return getIngredient().compareTo(o.getIngredient());
 	}
-
 }

@@ -26,11 +26,12 @@ public class SaladController {
 	public void processUserSaladSelection() {
 		view.printGreeting();
 
-		int userSaladSelection = Integer.parseInt(
-				readUserInput(ViewMessage.INSTRUCTION + ViewMessage.NEW_LINE + view.getSaladMenu(), RegexContainer.SALAD_NUMBER_REGEX));
+		int userSaladSelection = Integer
+				.parseInt(readUserInput(ViewMessage.INSTRUCTION + ViewMessage.NEW_LINE + view.getSaladMenu(),
+						RegexContainer.SALAD_NUMBER_REGEX));
 
 		Salad salad = saladCreationService.createSalad(userSaladSelection);
-		
+
 		showSaladDetails(salad);
 		findSaladVegetablesInCaloriesRange(salad);
 		orderAnotherSalad();
@@ -42,7 +43,7 @@ public class SaladController {
 
 	public void findSaladVegetablesInCaloriesRange(Salad salad) {
 		view.printSearchVegetablesInCaloriesRangeMessage();
-		
+
 		String minCaloricValue, maxCaloricValue;
 
 		while (!checkVegetablesCaloricRange((Double.parseDouble(
@@ -53,7 +54,7 @@ public class SaladController {
 		}
 		Set<SortableSaladIngredient<Vegetable>> vegetablesInCaloricRange = salad
 				.getVegetablesInCaloriesRange(Double.parseDouble(minCaloricValue), Double.parseDouble(maxCaloricValue));
-		view.printSaladVegetables(vegetablesInCaloricRange);
+		view.printSaladVegetables(ViewMessage.VEGETABLES, vegetablesInCaloricRange);
 	}
 
 	private boolean checkVegetablesCaloricRange(double minRangeValue, double maxRangeValue) {

@@ -24,14 +24,15 @@ public class View {
 	/**
 	 * Shows information about wrong input
 	 */
-	
-	public void printGreeting(){
+
+	public void printGreeting() {
 		printMessage(ViewMessage.GREETING, ViewMessage.NEW_LINE);
 	}
-	
-	public void printSearchVegetablesInCaloriesRangeMessage(){
+
+	public void printSearchVegetablesInCaloriesRangeMessage() {
 		printMessage(ViewMessage.NEW_LINE, ViewMessage.VEGETABLES_SEARCH_MESSAGE);
 	}
+
 	public void printWrongInput() {
 		printMessage(ViewMessage.WRONG_INPUT);
 	}
@@ -45,37 +46,48 @@ public class View {
 				ViewMessage.NEW_LINE, ViewMessage.SECOND_MENU_ITEM, ViewMessage.NEW_LINE, ViewMessage.THIRD_MENU_ITEM);
 		return menu;
 	}
-	
+
 	public void printSaladDetails(final Salad salad) {
 		Objects.requireNonNull(salad);
-		
+
 		printReadyInfo(salad.getClass().getSimpleName());
 		printSaladCalories(salad.getSaladCalories());
 		printSaladPrice(salad.getSaladPrice());
-		printSaladVegetables(salad.getSortedSaladVegetables());
-		printSaladDressing(salad.getDressings());
+		printSaladVegetables(ViewMessage.SORTED_VEGETABLES, salad.getSortedSaladVegetables());
+		printSaladDressings(ViewMessage.DRESSINGS, salad.getDressings());
 	}
 
 	private void printReadyInfo(String saladName) {
 		printMessage(saladName, ViewMessage.READY_INFO, (ViewMessage.NEW_LINE));
 	}
-	
+
 	private void printSaladCalories(double saladCaloric) {
-		printMessage(ViewMessage.CALORIFIC_VALUE, Double.toString(saladCaloric));
+		printMessage(ViewMessage.SALAD_CALORIFIC_VALUE, Double.toString(saladCaloric));
 	}
 
 	private void printSaladPrice(BigDecimal saladPrice) {
-		printMessage(ViewMessage.PRICE, saladPrice.toString());
+		printMessage(ViewMessage.SALAD_PRICE, saladPrice.toString());
 	}
 
-	public void printSaladVegetables(Set<SortableSaladIngredient<Vegetable>> saladVegetables) {
-		printMessage(saladVegetables.toString());
+	public void printSaladVegetables(String message, Set<SortableSaladIngredient<Vegetable>> saladVegetables) {
+		StringBuilder stringBuilder = new StringBuilder();
+
+		for (SortableSaladIngredient<Vegetable> vegetable : saladVegetables) {
+			stringBuilder.append(vegetable.toString()).append(ViewMessage.NEW_LINE);
+		}
+
+		printMessage(message, ViewMessage.NEW_LINE, stringBuilder.toString());
 	}
 
-	private void printSaladDressing(Set<SaladIngredient<Dressing>> saladDressings) {
-		printMessage(saladDressings.toString());
+	private void printSaladDressings(String message, Set<SaladIngredient<Dressing>> saladDressings) {
+		StringBuilder stringBuilder = new StringBuilder();
 
-	}	
+		for (SaladIngredient<Dressing> dressing : saladDressings) {
+			stringBuilder.append(dressing.toString()).append(ViewMessage.NEW_LINE);
+		}
+		
+		printMessage(message, ViewMessage.NEW_LINE, stringBuilder.toString());
+	}
 
 	/**
 	 * Shows constructed message
@@ -103,4 +115,5 @@ public class View {
 		}
 		return builder.toString();
 	}
+
 }
