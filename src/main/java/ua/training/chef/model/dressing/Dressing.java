@@ -3,6 +3,7 @@ package ua.training.chef.model.dressing;
 import java.math.BigDecimal;
 
 public abstract class Dressing {
+
 	private String type;
 	private double caloric;
 	private BigDecimal price;

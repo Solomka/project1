@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,65 +27,97 @@ public abstract class Salad {
 	abstract Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables();
 
 	abstract Set<SaladIngredient<Dressing>> prepareSaladDressings();
-
-	public List<SortableSaladIngredient<Vegetable>> getSortedSaladVegetables() {
+	
+	public Set<SortableSaladIngredient<Vegetable>> getVegetables() {
+		return vegetables;
+	}
+	
+	public Set<SortableSaladIngredient<Vegetable>> getSortedSaladVegetables() {
 
 		List<SortableSaladIngredient<Vegetable>> vegetablesList = new ArrayList<>(vegetables);
 		Collections.sort(vegetablesList);
 
-		return vegetablesList;
+		return new HashSet<>(vegetablesList);
 	}
-
-	public double getSaladCaloric() {
-		double generalSaladCaloric = 0.0;
+	
+	public Set<SortableSaladIngredient<Vegetable>> getVegetablesInCaloriesRange(double minCaloriesValue,
+			double maxCaloriesValue) {
+		Set<SortableSaladIngredient<Vegetable>> vegetablesInCaloriesRange = new HashSet<>();
 
 		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
-			generalSaladCaloric += (vegetable.getIngredient().getCaloric() * vegetable.getWeight())
+			if (vegetable.getIngredient().getCaloric() >= minCaloriesValue
+					&& vegetable.getIngredient().getCaloric() <= maxCaloriesValue) {
+				vegetablesInCaloriesRange.add(vegetable);
+			}
+		}
+		return vegetablesInCaloriesRange;
+	}
+
+	public Set<SaladIngredient<Dressing>> getDressings() {
+		return dressings;
+	}	
+	
+	public double getSaladCalories() {
+		double generalSaladCalories = 0.0;
+		
+		generalSaladCalories += getGeneralVegetablesCalories();
+		generalSaladCalories += getGeneralDressingsCalories();		
+
+		return Math.floor(generalSaladCalories * 100) / 100;
+	}
+	
+	private double getGeneralVegetablesCalories(){
+		double vegetablesCalories = 0.0;
+
+		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
+			vegetablesCalories += (vegetable.getIngredient().getCaloric() * vegetable.getWeight())
 					/ IngredientConstant.CALORIC_VALUE_GRAM_MEASURE;
 		}
-
+		
+		return vegetablesCalories;		
+	}
+	
+	private double getGeneralDressingsCalories(){
+		double dressingsCalories = 0.0;
+		
 		for (SaladIngredient<Dressing> dressing : dressings) {
-			generalSaladCaloric += (dressing.getIngredient().getCaloric() * dressing.getWeight())
+			dressingsCalories += (dressing.getIngredient().getCaloric() * dressing.getWeight())
 					/ IngredientConstant.CALORIC_VALUE_MILLILITER_MEASURE;
-
 		}
-		return generalSaladCaloric;
+		
+		return dressingsCalories;		
 	}
 
 	public BigDecimal getSaladPrice() {
-
-		BigDecimal generalSaladPrice = BigDecimal.ZERO;
-
-		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
-			generalSaladPrice.add((vegetable.getIngredient().getPrice()
-					.multiply(new BigDecimal(vegetable.getWeight(), MathContext.DECIMAL64)))
-							.divide(new BigDecimal(IngredientConstant.PRICE_GRAM_MEASURE, MathContext.DECIMAL64)));
-
-		}
+		BigDecimal generalSaladPrice = BigDecimal.ZERO;		
 		
-		for (SaladIngredient<Dressing> dreesing : dressings) {
-			generalSaladPrice.add((dreesing.getIngredient().getPrice()
-					.multiply(new BigDecimal(dreesing.getWeight(), MathContext.DECIMAL64)))
-							.divide(new BigDecimal(IngredientConstant.PRICE_MILLILITER_MEASURE, MathContext.DECIMAL64)));
-
-		}
-		
-		generalSaladPrice.add(generalSaladPrice.multiply(IngredientConstant.SALAD_EXTRA_PRICE));
-		
+	    generalSaladPrice = generalSaladPrice.add(getGeneralVegetablesPrice()).add(getGeneralDressingsPrice());
+	    BigDecimal restaurantExtra = generalSaladPrice.multiply(IngredientConstant.SALAD_EXTRA_PRICE, MathContext.DECIMAL64);
+	    generalSaladPrice = generalSaladPrice.add(restaurantExtra);
+	
 		return generalSaladPrice;
 	}
-
-	public List<SortableSaladIngredient<Vegetable>> getVegetablesInCaloricRange(double minCaloricValue,
-			double maxCaloricValue) {
-		List<SortableSaladIngredient<Vegetable>> vegetablesList = new ArrayList<>();
-
+	
+	private BigDecimal getGeneralVegetablesPrice(){
+		BigDecimal vegetablesPrice = BigDecimal.ZERO;
+		
 		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
-			if (vegetable.getIngredient().getCaloric() >= minCaloricValue
-					&& vegetable.getIngredient().getCaloric() <= maxCaloricValue) {
-				vegetablesList.add(vegetable);
-			}
-		}
-		return vegetablesList;
+			vegetablesPrice = vegetablesPrice.add((vegetable.getIngredient().getPrice()
+					.multiply(new BigDecimal(vegetable.getWeight()), MathContext.DECIMAL64))
+							.divide(new BigDecimal(IngredientConstant.PRICE_GRAM_MEASURE), MathContext.DECIMAL64));
+		}		
+		return vegetablesPrice;		
+	}
+	
+	private BigDecimal getGeneralDressingsPrice(){		
+		BigDecimal dressingsPrice = BigDecimal.ZERO;
+		
+		for (SaladIngredient<Dressing> dreesing : dressings) {
+			dressingsPrice = dressingsPrice.add((dreesing.getIngredient().getPrice()
+					.multiply(new BigDecimal(dreesing.getWeight()), MathContext.DECIMAL64)).divide(
+							new BigDecimal(IngredientConstant.PRICE_MILLILITER_MEASURE), MathContext.DECIMAL64));
+		}		
+		return dressingsPrice;		
 	}
 
 	@Override

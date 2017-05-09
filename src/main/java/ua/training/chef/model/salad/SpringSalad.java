@@ -10,13 +10,14 @@ import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
 import ua.training.chef.model.vegetable.Cucumber;
 import ua.training.chef.model.vegetable.Olive;
+import ua.training.chef.model.vegetable.Onion;
 import ua.training.chef.model.vegetable.Pepper;
 import ua.training.chef.model.vegetable.Tomato;
 import ua.training.chef.model.vegetable.Vegetable;
 
-public class GreekSalad extends Salad {
+public class SpringSalad extends Salad {
 
-	public GreekSalad() {
+	public SpringSalad() {
 		super();
 	}
 
@@ -25,13 +26,15 @@ public class GreekSalad extends Salad {
 		Set<SortableSaladIngredient<Vegetable>> greekSaladIngredients = new HashSet<SortableSaladIngredient<Vegetable>>();
 
 		greekSaladIngredients.add(
-				new SortableSaladIngredient<Vegetable>(new Cucumber("Ordinar cucumber", 15.5, new BigDecimal(17)), 70));
+				new SortableSaladIngredient<Vegetable>(new Cucumber("Ordinar cucumber", 15.5, new BigDecimal(30)), 50));
 		greekSaladIngredients
-				.add(new SortableSaladIngredient<Vegetable>(new Tomato("Cherry tomatoes", 18, new BigDecimal(45)), 85));
+				.add(new SortableSaladIngredient<Vegetable>(new Tomato("Cherry tomato", 18, new BigDecimal(80)), 85));
 		greekSaladIngredients
-				.add(new SortableSaladIngredient<Vegetable>(new Olive("Black olive", 115, new BigDecimal(100)), 100));
+				.add(new SortableSaladIngredient<Vegetable>(new Olive("Black olive", 115, new BigDecimal(180)), 40));
 		greekSaladIngredients.add(
-				new SortableSaladIngredient<Vegetable>(new Pepper("Green Bell pepper", 20.1, new BigDecimal(30)), 50));
+				new SortableSaladIngredient<Vegetable>(new Pepper("Green Bell pepper", 20.1, new BigDecimal(80)), 50));
+		greekSaladIngredients
+		.add(new SortableSaladIngredient<Vegetable>(new Onion("Leek onion", 60.9, new BigDecimal(100)), 15));
 
 		return greekSaladIngredients;
 	}
@@ -40,7 +43,7 @@ public class GreekSalad extends Salad {
 	Set<SaladIngredient<Dressing>> prepareSaladDressings() {
 		Set<SaladIngredient<Dressing>> greekSaladDressings = new HashSet<SaladIngredient<Dressing>>();
 
-		greekSaladDressings.add(new SaladIngredient<Dressing>(new Oil("Olive oil", 884, new BigDecimal(230)), 50));
+		greekSaladDressings.add(new SaladIngredient<Dressing>(new Oil("Olive oil", 884, new BigDecimal(230)), 30));
 
 		return greekSaladDressings;
 	}

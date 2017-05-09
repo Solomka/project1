@@ -1,9 +1,12 @@
 package ua.training.chef.view;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
+import ua.training.chef.model.dressing.Dressing;
 import ua.training.chef.model.salad.Salad;
+import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
 import ua.training.chef.model.vegetable.Vegetable;
 
@@ -21,6 +24,14 @@ public class View {
 	/**
 	 * Shows information about wrong input
 	 */
+	
+	public void printGreeting(){
+		printMessage(ViewMessage.GREETING, ViewMessage.NEW_LINE);
+	}
+	
+	public void printSearchVegetablesInCaloriesRangeMessage(){
+		printMessage(ViewMessage.NEW_LINE, ViewMessage.VEGETABLES_SEARCH_MESSAGE);
+	}
 	public void printWrongInput() {
 		printMessage(ViewMessage.WRONG_INPUT);
 	}
@@ -34,29 +45,37 @@ public class View {
 				ViewMessage.NEW_LINE, ViewMessage.SECOND_MENU_ITEM, ViewMessage.NEW_LINE, ViewMessage.THIRD_MENU_ITEM);
 		return menu;
 	}
-
-	public void printSaladInfo(Salad salad) {
+	
+	public void printSaladDetails(final Salad salad) {
+		Objects.requireNonNull(salad);
+		
 		printReadyInfo(salad.getClass().getSimpleName());
-		printSaladCaloric(salad.getSaladCaloric());
+		printSaladCalories(salad.getSaladCalories());
 		printSaladPrice(salad.getSaladPrice());
 		printSaladVegetables(salad.getSortedSaladVegetables());
+		printSaladDressing(salad.getDressings());
 	}
 
 	private void printReadyInfo(String saladName) {
-		printMessage(saladName, ViewMessage.READY_INFO);
+		printMessage(saladName, ViewMessage.READY_INFO, (ViewMessage.NEW_LINE));
 	}
-
-	public void printSaladVegetables(List<SortableSaladIngredient<Vegetable>> saladVegetables) {
-		printMessage(saladVegetables.toString());
-	}
-
-	private void printSaladCaloric(double saladCaloric) {
+	
+	private void printSaladCalories(double saladCaloric) {
 		printMessage(ViewMessage.CALORIFIC_VALUE, Double.toString(saladCaloric));
 	}
 
 	private void printSaladPrice(BigDecimal saladPrice) {
 		printMessage(ViewMessage.PRICE, saladPrice.toString());
 	}
+
+	public void printSaladVegetables(Set<SortableSaladIngredient<Vegetable>> saladVegetables) {
+		printMessage(saladVegetables.toString());
+	}
+
+	private void printSaladDressing(Set<SaladIngredient<Dressing>> saladDressings) {
+		printMessage(saladDressings.toString());
+
+	}	
 
 	/**
 	 * Shows constructed message
