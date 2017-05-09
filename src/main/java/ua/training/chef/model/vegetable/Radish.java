@@ -1,12 +1,10 @@
 package ua.training.chef.model.vegetable;
 
-public class Radish extends Vegetable{
+import java.math.BigDecimal;
 
-	public Radish(String type, double caloric, double price) {
+public class Radish extends Vegetable {
+
+	public Radish(String type, double caloric, BigDecimal price) {
 		super(type, caloric, price);
-		// TODO Auto-generated constructor stub
 	}
-
-
-
 }

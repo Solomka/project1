@@ -1,26 +1,35 @@
 package ua.training.chef.model.salad;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import ua.training.chef.constants.IngredientConstant;
+import ua.training.chef.model.dressing.Dressing;
+import ua.training.chef.model.salad.ingredient.SaladIngredient;
+import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
 import ua.training.chef.model.vegetable.Vegetable;
-import ua.training.chef.model.vegetable.VegetableConstant;
 
 public abstract class Salad {
 
-	private Set<VegetableSaladIngredient> vegetables;
+	private Set<SortableSaladIngredient<Vegetable>> vegetables;
+	private Set<SaladIngredient<Dressing>> dressings;
 
 	public Salad() {
 		this.vegetables = prepareSaladVegetables();
+		this.dressings = prepareSaladDressings();
 	}
 
-	abstract protected Set<VegetableSaladIngredient> prepareSaladVegetables();
+	abstract Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables();
 
-	public List<VegetableSaladIngredient> getSortedSaladVegetables() {
+	abstract Set<SaladIngredient<Dressing>> prepareSaladDressings();
 
-		List<VegetableSaladIngredient> vegetablesList = new ArrayList<>(vegetables);
+	public List<SortableSaladIngredient<Vegetable>> getSortedSaladVegetables() {
+
+		List<SortableSaladIngredient<Vegetable>> vegetablesList = new ArrayList<>(vegetables);
 		Collections.sort(vegetablesList);
 
 		return vegetablesList;
@@ -29,27 +38,47 @@ public abstract class Salad {
 	public double getSaladCaloric() {
 		double generalSaladCaloric = 0.0;
 
-		for (VegetableSaladIngredient vegetable : vegetables) {
+		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
 			generalSaladCaloric += (vegetable.getIngredient().getCaloric() * vegetable.getWeight())
-					/ VegetableConstant.VEG_CALORIC_VALUE_GRAM_MEASURE;
+					/ IngredientConstant.CALORIC_VALUE_GRAM_MEASURE;
+		}
+
+		for (SaladIngredient<Dressing> dressing : dressings) {
+			generalSaladCaloric += (dressing.getIngredient().getCaloric() * dressing.getWeight())
+					/ IngredientConstant.CALORIC_VALUE_MILLILITER_MEASURE;
+
 		}
 		return generalSaladCaloric;
 	}
-	
-	public double getSaladPrice(){
-		double generalSaladPrice = 0.0;
 
-		for (VegetableSaladIngredient vegetable : vegetables) {
-			generalSaladPrice += (vegetable.getIngredient().getPrice() * vegetable.getWeight())
-					/ VegetableConstant.VEG_PRICE_GRAM_MEASURE;
+	public BigDecimal getSaladPrice() {
+
+		BigDecimal generalSaladPrice = BigDecimal.ZERO;
+
+		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
+			generalSaladPrice.add((vegetable.getIngredient().getPrice()
+					.multiply(new BigDecimal(vegetable.getWeight(), MathContext.DECIMAL64)))
+							.divide(new BigDecimal(IngredientConstant.PRICE_GRAM_MEASURE, MathContext.DECIMAL64)));
+
 		}
-		return generalSaladPrice;		
+		
+		for (SaladIngredient<Dressing> dreesing : dressings) {
+			generalSaladPrice.add((dreesing.getIngredient().getPrice()
+					.multiply(new BigDecimal(dreesing.getWeight(), MathContext.DECIMAL64)))
+							.divide(new BigDecimal(IngredientConstant.PRICE_MILLILITER_MEASURE, MathContext.DECIMAL64)));
+
+		}
+		
+		generalSaladPrice.add(generalSaladPrice.multiply(IngredientConstant.SALAD_EXTRA_PRICE));
+		
+		return generalSaladPrice;
 	}
 
-	public List<VegetableSaladIngredient> getVegetablesInCaloricRange(double minCaloricValue, double maxCaloricValue) {
-		List<VegetableSaladIngredient> vegetablesList = new ArrayList<>();
+	public List<SortableSaladIngredient<Vegetable>> getVegetablesInCaloricRange(double minCaloricValue,
+			double maxCaloricValue) {
+		List<SortableSaladIngredient<Vegetable>> vegetablesList = new ArrayList<>();
 
-		for (VegetableSaladIngredient vegetable : vegetables) {
+		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
 			if (vegetable.getIngredient().getCaloric() >= minCaloricValue
 					&& vegetable.getIngredient().getCaloric() <= maxCaloricValue) {
 				vegetablesList.add(vegetable);
@@ -62,7 +91,4 @@ public abstract class Salad {
 	public String toString() {
 		return "Salad [\n vegetables=" + vegetables + "]";
 	}
-	
-	
-	
 }

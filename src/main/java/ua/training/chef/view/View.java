@@ -1,11 +1,10 @@
 package ua.training.chef.view;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import ua.training.chef.model.salad.Salad;
-import ua.training.chef.model.salad.VegetableSaladIngredient;
+import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
 import ua.training.chef.model.vegetable.Vegetable;
 
 /**
@@ -47,16 +46,16 @@ public class View {
 		printMessage(saladName, ViewMessage.READY_INFO);
 	}
 
-	public void printSaladVegetables(List<VegetableSaladIngredient> saladVegetables) {
+	public void printSaladVegetables(List<SortableSaladIngredient<Vegetable>> saladVegetables) {
 		printMessage(saladVegetables.toString());
 	}
 
 	private void printSaladCaloric(double saladCaloric) {
 		printMessage(ViewMessage.CALORIFIC_VALUE, Double.toString(saladCaloric));
 	}
-	
-	private void printSaladPrice(double saladPrice){
-		printMessage(ViewMessage.PRICE, Double.toString(saladPrice));
+
+	private void printSaladPrice(BigDecimal saladPrice) {
+		printMessage(ViewMessage.PRICE, saladPrice.toString());
 	}
 
 	/**

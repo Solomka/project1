@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import ua.training.chef.model.salad.Salad;
-import ua.training.chef.model.salad.VegetableSaladIngredient;
+import ua.training.chef.model.salad.SortableSaladIngredient;
 import ua.training.chef.model.vegetable.Vegetable;
 import ua.training.chef.service.SaladCreationServiceImpl;
 import ua.training.chef.view.View;
@@ -49,7 +49,7 @@ public class SaladController {
 						RegexContainer.CALORIC_RANGE_REGEX))))) {
 			view.printWrongInput();
 		}
-		List<VegetableSaladIngredient> vegetablesInCaloricRange = salad.getVegetablesInCaloricRange(Double.parseDouble(minCaloricValue), Double.parseDouble(maxCaloricValue));
+		List<SortableSaladIngredient> vegetablesInCaloricRange = salad.getVegetablesInCaloricRange(Double.parseDouble(minCaloricValue), Double.parseDouble(maxCaloricValue));
 		view.printSaladVegetables(vegetablesInCaloricRange);
 	}
 

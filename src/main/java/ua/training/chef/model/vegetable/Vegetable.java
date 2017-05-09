@@ -1,12 +1,14 @@
 package ua.training.chef.model.vegetable;
 
-public abstract class Vegetable implements Comparable<Vegetable> {	
+import java.math.BigDecimal;
+
+public abstract class Vegetable implements Comparable<Vegetable> {
 
 	private String type;
 	private double caloric;
-	private double price;
+	private BigDecimal price;
 
-	public Vegetable(String type, double caloric, double price) {
+	public Vegetable(String type, double caloric, BigDecimal price) {
 		super();
 		this.type = type;
 		this.caloric = caloric;
@@ -21,7 +23,7 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 		return caloric;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
@@ -38,5 +40,4 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 	}
 	
 	
-
 }
