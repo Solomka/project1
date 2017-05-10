@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.junit.Test;
@@ -114,7 +115,7 @@ public class SaladTest {
 
 		@Override
 		public Set<SortableSaladIngredient<Vegetable>> getSortedSaladVegetables() {
-			Set<SortableSaladIngredient<Vegetable>> sortedVegetables = new HashSet<>();
+			Set<SortableSaladIngredient<Vegetable>> sortedVegetables = new LinkedHashSet<>();
 
 			sortedVegetables.add(new SortableSaladIngredient<Vegetable>(
 					new Lettuce("Iceberg lettuce", 14.8, new BigDecimal(80)), 80));
