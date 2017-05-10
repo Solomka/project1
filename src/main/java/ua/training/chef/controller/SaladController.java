@@ -44,16 +44,16 @@ public class SaladController {
 	public void findSaladVegetablesInCaloriesRange(Salad salad) {
 		view.printSearchVegetablesInCaloriesRangeMessage();
 
-		String minCaloricValue, maxCaloricValue;
+		String minCaloriesValue, maxCaloriesValue;
 
 		while (!checkVegetablesCaloricRange((Double.parseDouble(
-				minCaloricValue = readUserInput(ViewMessage.MIN_CALORIC_VALUE, RegexContainer.CALORIC_RANGE_REGEX))),
-				(Double.parseDouble(maxCaloricValue = readUserInput(ViewMessage.MAX_CALORIC_VALUE,
+				minCaloriesValue = readUserInput(ViewMessage.MIN_CALORIC_VALUE, RegexContainer.CALORIC_RANGE_REGEX))),
+				(Double.parseDouble(maxCaloriesValue = readUserInput(ViewMessage.MAX_CALORIC_VALUE,
 						RegexContainer.CALORIC_RANGE_REGEX))))) {
 			view.printWrongInput();
 		}
 		Set<SortableSaladIngredient<Vegetable>> vegetablesInCaloricRange = salad
-				.getVegetablesInCaloriesRange(Double.parseDouble(minCaloricValue), Double.parseDouble(maxCaloricValue));
+				.getVegetablesInCaloriesRange(Double.parseDouble(minCaloriesValue), Double.parseDouble(maxCaloriesValue));
 		view.printSaladVegetables(ViewMessage.VEGETABLES, vegetablesInCaloricRange);
 	}
 

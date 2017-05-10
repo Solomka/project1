@@ -22,7 +22,7 @@ public class VitaminSalad extends Salad {
 	}
 
 	@Override
-	protected Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
+	public Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
 		Set<SortableSaladIngredient<Vegetable>> vitaminSaladIngredients = new HashSet<>();
 
 		vitaminSaladIngredients.add(
@@ -40,7 +40,7 @@ public class VitaminSalad extends Salad {
 	}
 
 	@Override
-	Set<SaladIngredient<Dressing>> prepareSaladDressings() {
+	public Set<SaladIngredient<Dressing>> prepareSaladDressings() {
 		Set<SaladIngredient<Dressing>> vitaminSaladDressings = new HashSet<SaladIngredient<Dressing>>();
 
 		vitaminSaladDressings.add(new SaladIngredient<Dressing>(new Oil("Olive oil", 884, new BigDecimal(230)), 15));

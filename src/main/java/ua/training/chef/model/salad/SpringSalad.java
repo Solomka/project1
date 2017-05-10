@@ -22,7 +22,7 @@ public class SpringSalad extends Salad {
 	}
 
 	@Override
-	Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
+	public Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
 		Set<SortableSaladIngredient<Vegetable>> greekSaladIngredients = new HashSet<SortableSaladIngredient<Vegetable>>();
 
 		greekSaladIngredients.add(
@@ -34,13 +34,13 @@ public class SpringSalad extends Salad {
 		greekSaladIngredients.add(
 				new SortableSaladIngredient<Vegetable>(new Pepper("Green Bell pepper", 20.1, new BigDecimal(80)), 50));
 		greekSaladIngredients
-		.add(new SortableSaladIngredient<Vegetable>(new Onion("Leek onion", 60.9, new BigDecimal(100)), 15));
+				.add(new SortableSaladIngredient<Vegetable>(new Onion("Leek onion", 60.9, new BigDecimal(100)), 15));
 
 		return greekSaladIngredients;
 	}
 
 	@Override
-	Set<SaladIngredient<Dressing>> prepareSaladDressings() {
+	public Set<SaladIngredient<Dressing>> prepareSaladDressings() {
 		Set<SaladIngredient<Dressing>> greekSaladDressings = new HashSet<SaladIngredient<Dressing>>();
 
 		greekSaladDressings.add(new SaladIngredient<Dressing>(new Oil("Olive oil", 884, new BigDecimal(230)), 30));

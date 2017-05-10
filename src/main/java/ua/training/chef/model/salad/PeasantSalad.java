@@ -22,7 +22,7 @@ public class PeasantSalad extends Salad {
 	}
 
 	@Override
-	protected Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
+	public Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
 		Set<SortableSaladIngredient<Vegetable>> peasantSaladIngredients = new HashSet<>();
 
 		peasantSaladIngredients
@@ -40,7 +40,7 @@ public class PeasantSalad extends Salad {
 	}
 
 	@Override
-	Set<SaladIngredient<Dressing>> prepareSaladDressings() {
+	public Set<SaladIngredient<Dressing>> prepareSaladDressings() {
 		Set<SaladIngredient<Dressing>> peasantSaladDressings = new HashSet<SaladIngredient<Dressing>>();
 
 		peasantSaladDressings.add(
