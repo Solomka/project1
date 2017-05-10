@@ -12,6 +12,6 @@ public class Main {
 		View view = new View();
 		SaladController controller = new SaladController(saladCreationService, view);
 
-		controller.processUserSaladSelection();
+		controller.processUser();
 	}
 }

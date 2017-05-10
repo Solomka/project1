@@ -23,12 +23,24 @@ public class SaladController {
 		this.scanner = new Scanner(System.in);
 	}
 
-	public void processUserSaladSelection() {
+	public void processUser() {
+		chooseLanguage();
 		view.printGreeting();
 
-		int userSaladSelection = Integer
-				.parseInt(readUserInput(ViewMessage.INSTRUCTION + ViewMessage.NEW_LINE + view.getSaladMenu(),
-						RegexContainer.SALAD_NUMBER_REGEX));
+		processUserSaladSelection();
+	}
+
+	private void chooseLanguage() {
+		String userSaladSelection = UserInputProcessUtility.readUserInput(scanner, view, ViewMessage.LANGUAGE_CHOICE,
+				RegexContainer.LANGUAGE_REGEX);
+
+		View.setResourceBundleLocale(userSaladSelection);
+	}
+
+	private void processUserSaladSelection() {
+		int userSaladSelection = Integer.parseInt(UserInputProcessUtility.readUserInput(scanner, view,
+				View.BUNDLE.getString(ViewMessage.INSTRUCTION) + ViewMessage.NEW_LINE + view.getSaladMenu(),
+				RegexContainer.SALAD_NUMBER_REGEX));
 
 		Salad salad = saladCreationService.createSalad(userSaladSelection);
 
@@ -46,15 +58,17 @@ public class SaladController {
 
 		String minCaloriesValue, maxCaloriesValue;
 
-		while (!checkVegetablesCaloricRange((Double.parseDouble(
-				minCaloriesValue = readUserInput(ViewMessage.MIN_CALORIC_VALUE, RegexContainer.CALORIC_RANGE_REGEX))),
-				(Double.parseDouble(maxCaloriesValue = readUserInput(ViewMessage.MAX_CALORIC_VALUE,
-						RegexContainer.CALORIC_RANGE_REGEX))))) {
+		while (!checkVegetablesCaloricRange(
+				(Double.parseDouble(minCaloriesValue = UserInputProcessUtility.readUserInput(scanner, view,
+						View.BUNDLE.getString(ViewMessage.MIN_CALORIC_VALUE), RegexContainer.CALORIC_RANGE_REGEX))),
+				(Double.parseDouble(maxCaloriesValue = UserInputProcessUtility.readUserInput(scanner, view,
+						View.BUNDLE.getString(ViewMessage.MAX_CALORIC_VALUE), RegexContainer.CALORIC_RANGE_REGEX))))) {
 			view.printWrongInput();
 		}
-		Set<SortableSaladIngredient<Vegetable>> vegetablesInCaloricRange = salad
-				.getVegetablesInCaloriesRange(Double.parseDouble(minCaloriesValue), Double.parseDouble(maxCaloriesValue));
-		view.printSaladVegetables(ViewMessage.VEGETABLES, vegetablesInCaloricRange);
+		Set<SortableSaladIngredient<Vegetable>> vegetablesInCaloricRange = salad.getVegetablesInCaloriesRange(
+				Double.parseDouble(minCaloriesValue), Double.parseDouble(maxCaloriesValue));
+
+		view.printSaladVegetables(View.BUNDLE.getString(ViewMessage.VEGETABLES), vegetablesInCaloricRange);
 	}
 
 	private boolean checkVegetablesCaloricRange(double minRangeValue, double maxRangeValue) {
@@ -65,7 +79,8 @@ public class SaladController {
 	}
 
 	public void orderAnotherSalad() {
-		String userChoise = readUserInput(ViewMessage.TRY_AGAIN, RegexContainer.TRY_AGAIN_REGEX);
+		String userChoise = UserInputProcessUtility.readUserInput(scanner, view,
+				View.BUNDLE.getString(ViewMessage.TRY_AGAIN), RegexContainer.TRY_AGAIN_REGEX);
 		checkUserDecision(userChoise);
 	}
 
@@ -75,20 +90,9 @@ public class SaladController {
 			processUserSaladSelection();
 			break;
 		case "n":
-			view.printMessage(ViewMessage.BYE);
+			view.printMessage(View.BUNDLE.getString(ViewMessage.BYE));
 			break;
 		}
 	}
 
-	private String readUserInput(String message, String regex) {
-		view.printMessage(message);
-
-		String res = "";
-		while (!(scanner.hasNextLine() && (res = scanner.nextLine()).matches(regex))) {
-			view.printWrongInput();
-			view.printMessage(message);
-		}
-
-		return res;
-	}
 }

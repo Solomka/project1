@@ -8,35 +8,36 @@ package ua.training.chef.view;
  */
 public interface ViewMessage {
 
-	public String GREETING = "Welcome to the vegetable salad restaurant!";
-	public String INSTRUCTION = "Choose vegetable salad's number from the menu: ";
-	public String MENU = "Vegetable Salalds' menu: ";
-	public String TRY_AGAIN = "Do you want to order another salad (y/n)?";
-	public String BYE = "BYE! Come again!";
+	public String LANGUAGE_CHOICE = "Choose GUI language(ua/en):";
+	public String GREETING = "chef.input.greeting";
+	public String INSTRUCTION = "chef.input.instruction";
+	public String MENU = "chef.input.menu";
+	public String TRY_AGAIN = "chef.input.tryAgain";
+	public String BYE = "chef.input.bye";
 
-	public String READY_INFO = " salad is ready! Bon appetit!";
-	public String SALAD_CALORIFIC_VALUE = "General salad calories: ";
-	public String SALAD_PRICE = "General salad price: ";
-	public String VEGETABLES = "Salad vegetables: ";
-	public String SORTED_VEGETABLES = "Sorted salad vegetables by caloric value: ";	
-	public String DRESSINGS = "Salad dressings: ";
+	public String READY_INFO = "chef.input.readyInfo";
+	public String SALAD_CALORIFIC_VALUE = "chef.input.generalSaladCalories";
+	public String SALAD_PRICE = "chef.input.generalSaladPrice";
+	public String VEGETABLES = "chef.input.vegetables";
+	public String SORTED_VEGETABLES = "chef.input.sortedVegetables";	
+	public String DRESSINGS = "chef.input.dressings";
 
-	public String VEGETABLES_SEARCH_MESSAGE = "Search vegetables in the calories range: ";
-	public String MIN_CALORIC_VALUE = "Type min vegetable's calories value: ";
-	public String MAX_CALORIC_VALUE = "Type max vegetable's calories value: ";
+	public String VEGETABLES_SEARCH_MESSAGE = "chef.input.searchCondition";
+	public String MIN_CALORIC_VALUE = "chef.input.minCaloriesValue";
+	public String MAX_CALORIC_VALUE = "chef.input.maxCaloriesValue";
 
-	public String FIRST_MENU_ITEM = "1. Spring salad;";
-	public String SECOND_MENU_ITEM = "2. Vitamin salad;";
-	public String THIRD_MENU_ITEM = "3. Peasant salad;";
+	public String FIRST_MENU_ITEM = "chef.input.firstMenuItem";
+	public String SECOND_MENU_ITEM = "chef.input.seconMenuItem";
+	public String THIRD_MENU_ITEM = "chef.input.thirdMenuItem";
 
-	public String WRONG_INPUT = "Wrong input. Try again!";
+	public String WRONG_INPUT = "chef.input.wrongInput";
 	public String SALAD_FACTORY_ERROR_MSG = "Such salad is not served in our salad restaurant";
 
-	public String TYPE = "Type";
-	public String CALORIES = "Calories";
-	public String PRICE = "Price";
-	public String FAT = "Fat";
-	public String WEIGHT = "Weight";
+	public String TYPE = "chef.input.type";
+	public String CALORIES = "chef.input.calories";
+	public String PRICE = "chef.input.price";
+	public String FAT = "chef.input.fat";
+	public String WEIGHT = "chef.input.weight";
 	public String PER = "per";
 	public String MEASURE = "g/ml";
 

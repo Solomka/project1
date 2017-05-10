@@ -7,6 +7,45 @@ import org.junit.Test;
 import ua.training.chef.controller.RegexContainer;
 
 public class RegexContainerTest {
+	
+	@Test
+	public void testLanguageRegex() {
+		String language = "en";
+
+		boolean actual = language.matches(RegexContainer.LANGUAGE_REGEX);
+		boolean expected = true;
+
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testLanguageRegexEmpty() {
+		String language = " ";
+
+		boolean actual = language.matches(RegexContainer.LANGUAGE_REGEX);
+		boolean expected = false;
+
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testLanguageRegexWrong() {
+		String language = "enua";
+
+		boolean actual = language.matches(RegexContainer.LANGUAGE_REGEX);
+		boolean expected = false;
+
+		assertEquals(expected, actual);
+	}
+	@Test
+	public void testLanguageRegexInteger() {
+		String language = "1";
+
+		boolean actual = language.matches(RegexContainer.LANGUAGE_REGEX);
+		boolean expected = false;
+
+		assertEquals(expected, actual);
+	}
 
 	@Test
 	public void testSaladNumberRegexEmptyStr() {

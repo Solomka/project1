@@ -2,7 +2,8 @@ package ua.training.chef.model.dressing;
 
 import java.math.BigDecimal;
 
-import ua.training.chef.constants.IngredientConstant;
+import ua.training.chef.constants.GlobalConstants;
+import ua.training.chef.view.View;
 import ua.training.chef.view.ViewMessage;
 
 public abstract class Dressing {
@@ -69,10 +70,14 @@ public abstract class Dressing {
 	@Override
 	public String toString() {
 		return new StringBuilder(getClass().getSimpleName()).append(ViewMessage.EQUALITY_SIGN)
-				.append(ViewMessage.EMPTY_STR).append(ViewMessage.TYPE).append(ViewMessage.COLON)
+				.append(ViewMessage.EMPTY_STR).append(View.BUNDLE.getString(ViewMessage.TYPE)).append(ViewMessage.COLON)
 				.append(ViewMessage.EMPTY_STR).append(getType()).append(ViewMessage.COMMA).append(ViewMessage.EMPTY_STR)
-				.append(ViewMessage.CALORIES).append(ViewMessage.COLON).append(ViewMessage.EMPTY_STR)
-				.append(getCalories()).append(ViewMessage.EMPTY_STR).append(ViewMessage.getUnitOfMeasurement(IngredientConstant.CALORIC_VALUE_MILLILITER_MEASURE)).append(ViewMessage.COMMA).append(ViewMessage.EMPTY_STR).append(ViewMessage.PRICE)
-				.append(ViewMessage.COLON).append(ViewMessage.EMPTY_STR).append(getPrice()).append(ViewMessage.EMPTY_STR).append(ViewMessage.getUnitOfMeasurement(IngredientConstant.PRICE_MILLILITER_MEASURE)).toString();
+				.append(View.BUNDLE.getString(ViewMessage.CALORIES)).append(ViewMessage.COLON)
+				.append(ViewMessage.EMPTY_STR).append(getCalories()).append(ViewMessage.EMPTY_STR)
+				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.CALORIC_VALUE_MILLILITER_MEASURE))
+				.append(ViewMessage.COMMA).append(ViewMessage.EMPTY_STR)
+				.append(View.BUNDLE.getString(ViewMessage.PRICE)).append(ViewMessage.COLON)
+				.append(ViewMessage.EMPTY_STR).append(getPrice()).append(ViewMessage.EMPTY_STR)
+				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.PRICE_MILLILITER_MEASURE)).toString();
 	}
 }

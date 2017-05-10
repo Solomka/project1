@@ -1,7 +1,9 @@
 package ua.training.chef.view;
 
 import java.math.BigDecimal;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import ua.training.chef.model.dressing.Dressing;
@@ -21,20 +23,29 @@ import ua.training.chef.model.vegetable.Vegetable;
  */
 public class View {
 
+	public static final String MESSAGES_BUNDLE_NAME = "messages";
+
+	// default Locale
+	public static ResourceBundle BUNDLE = ResourceBundle.getBundle(MESSAGES_BUNDLE_NAME, new Locale("en"));
+
+	public static void setResourceBundleLocale(String locale) {
+		BUNDLE = ResourceBundle.getBundle(MESSAGES_BUNDLE_NAME, new Locale(locale));
+	}
+
 	/**
 	 * Shows information about wrong input
 	 */
 
 	public void printGreeting() {
-		printMessage(ViewMessage.GREETING, ViewMessage.NEW_LINE);
+		printMessage(BUNDLE.getString(ViewMessage.GREETING), ViewMessage.NEW_LINE);
 	}
 
 	public void printSearchVegetablesInCaloriesRangeMessage() {
-		printMessage(ViewMessage.NEW_LINE, ViewMessage.VEGETABLES_SEARCH_MESSAGE);
+		printMessage(ViewMessage.NEW_LINE, BUNDLE.getString(ViewMessage.VEGETABLES_SEARCH_MESSAGE));
 	}
 
 	public void printWrongInput() {
-		printMessage(ViewMessage.WRONG_INPUT);
+		printMessage(BUNDLE.getString(ViewMessage.WRONG_INPUT));
 	}
 
 	public void printSaladMenu() {
@@ -42,8 +53,10 @@ public class View {
 	}
 
 	public String getSaladMenu() {
-		String menu = generateMessageFromParts(ViewMessage.MENU, ViewMessage.NEW_LINE, ViewMessage.FIRST_MENU_ITEM,
-				ViewMessage.NEW_LINE, ViewMessage.SECOND_MENU_ITEM, ViewMessage.NEW_LINE, ViewMessage.THIRD_MENU_ITEM);
+		String menu = generateMessageFromParts(BUNDLE.getString(ViewMessage.MENU), ViewMessage.NEW_LINE,
+				BUNDLE.getString(ViewMessage.FIRST_MENU_ITEM), ViewMessage.NEW_LINE,
+				BUNDLE.getString(ViewMessage.SECOND_MENU_ITEM), ViewMessage.NEW_LINE,
+				BUNDLE.getString(ViewMessage.THIRD_MENU_ITEM));
 		return menu;
 	}
 
@@ -53,20 +66,20 @@ public class View {
 		printReadyInfo(salad.getClass().getSimpleName());
 		printSaladCalories(salad.getSaladCalories());
 		printSaladPrice(salad.getSaladPrice());
-		printSaladVegetables(ViewMessage.SORTED_VEGETABLES, salad.getSortedSaladVegetables());
-		printSaladDressings(ViewMessage.DRESSINGS, salad.getDressings());
+		printSaladVegetables(BUNDLE.getString(ViewMessage.SORTED_VEGETABLES), salad.getSortedSaladVegetables());
+		printSaladDressings(BUNDLE.getString(ViewMessage.DRESSINGS), salad.getDressings());
 	}
 
 	private void printReadyInfo(String saladName) {
-		printMessage(saladName, ViewMessage.READY_INFO, (ViewMessage.NEW_LINE));
+		printMessage(saladName, BUNDLE.getString(ViewMessage.READY_INFO), (ViewMessage.NEW_LINE));
 	}
 
 	private void printSaladCalories(double saladCaloric) {
-		printMessage(ViewMessage.SALAD_CALORIFIC_VALUE, Double.toString(saladCaloric));
+		printMessage(BUNDLE.getString(ViewMessage.SALAD_CALORIFIC_VALUE), Double.toString(saladCaloric));
 	}
 
 	private void printSaladPrice(BigDecimal saladPrice) {
-		printMessage(ViewMessage.SALAD_PRICE, saladPrice.toString());
+		printMessage(BUNDLE.getString(ViewMessage.SALAD_PRICE), saladPrice.toString());
 	}
 
 	public void printSaladVegetables(String message, Set<SortableSaladIngredient<Vegetable>> saladVegetables) {
@@ -85,7 +98,7 @@ public class View {
 		for (SaladIngredient<Dressing> dressing : saladDressings) {
 			stringBuilder.append(dressing.toString()).append(ViewMessage.NEW_LINE);
 		}
-		
+
 		printMessage(message, ViewMessage.NEW_LINE, stringBuilder.toString());
 	}
 
