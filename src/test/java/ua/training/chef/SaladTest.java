@@ -55,7 +55,6 @@ public class SaladTest {
 
 		Double expected = testingSaladSubclass.getSaladCalories();
 		Double actual = salad.getSaladCalories();
-		System.out.println(actual);
 
 		assertEquals(expected, actual);
 	}

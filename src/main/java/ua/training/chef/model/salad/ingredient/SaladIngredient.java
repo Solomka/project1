@@ -1,5 +1,6 @@
 package ua.training.chef.model.salad.ingredient;
 
+import ua.training.chef.view.View;
 import ua.training.chef.view.ViewMessage;
 
 public class SaladIngredient<T> {
@@ -63,9 +64,9 @@ public class SaladIngredient<T> {
 	@Override
 	public String toString() {
 		return new StringBuilder(ViewMessage.LEFT_PARENTHESIS).append(ingredient.toString())
-				.append(ViewMessage.VERT_LINA).append(ViewMessage.WEIGHT).append(ViewMessage.COLON).append(getWeight())
-				.append(ViewMessage.EMPTY_STR).append(ViewMessage.MEASURE).append(ViewMessage.EMPTY_STR)
-				.append(ViewMessage.RIGHT_PARANTHESIS).toString();
+				.append(ViewMessage.VERT_LINA).append(View.BUNDLE.getString(ViewMessage.WEIGHT))
+				.append(ViewMessage.COLON).append(getWeight()).append(ViewMessage.EMPTY_STR).append(ViewMessage.MEASURE)
+				.append(ViewMessage.EMPTY_STR).append(ViewMessage.RIGHT_PARANTHESIS).toString();
 	}
 
 }

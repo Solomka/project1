@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import ua.training.chef.constants.IngredientConstant;
+import ua.training.chef.constants.GlobalConstants;
 import ua.training.chef.model.dressing.Dressing;
 import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
@@ -65,7 +65,7 @@ public abstract class Salad {
 
 		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
 			vegetablesCalories += (vegetable.getIngredient().getCalories() * vegetable.getWeight())
-					/ IngredientConstant.CALORIC_VALUE_GRAM_MEASURE;
+					/ GlobalConstants.CALORIC_VALUE_GRAM_MEASURE;
 		}
 
 		return vegetablesCalories;
@@ -76,7 +76,7 @@ public abstract class Salad {
 
 		for (SaladIngredient<Dressing> dressing : dressings) {
 			dressingsCalories += (dressing.getIngredient().getCalories() * dressing.getWeight())
-					/ IngredientConstant.CALORIC_VALUE_MILLILITER_MEASURE;
+					/ GlobalConstants.CALORIC_VALUE_MILLILITER_MEASURE;
 		}
 
 		return dressingsCalories;
@@ -86,7 +86,7 @@ public abstract class Salad {
 		BigDecimal generalSaladPrice = BigDecimal.ZERO;
 
 		generalSaladPrice = generalSaladPrice.add(getGeneralVegetablesPrice()).add(getGeneralDressingsPrice());
-		BigDecimal restaurantExtra = generalSaladPrice.multiply(IngredientConstant.SALAD_EXTRA_PRICE,
+		BigDecimal restaurantExtra = generalSaladPrice.multiply(GlobalConstants.SALAD_EXTRA_PRICE,
 				MathContext.DECIMAL64);
 		generalSaladPrice = generalSaladPrice.add(restaurantExtra);
 
@@ -99,7 +99,7 @@ public abstract class Salad {
 		for (SortableSaladIngredient<Vegetable> vegetable : vegetables) {
 			vegetablesPrice = vegetablesPrice.add((vegetable.getIngredient().getPrice()
 					.multiply(new BigDecimal(vegetable.getWeight()), MathContext.DECIMAL64))
-							.divide(new BigDecimal(IngredientConstant.PRICE_GRAM_MEASURE), MathContext.DECIMAL64));
+							.divide(new BigDecimal(GlobalConstants.PRICE_GRAM_MEASURE), MathContext.DECIMAL64));
 		}
 		return vegetablesPrice;
 	}
@@ -110,7 +110,7 @@ public abstract class Salad {
 		for (SaladIngredient<Dressing> dreesing : dressings) {
 			dressingsPrice = dressingsPrice.add((dreesing.getIngredient().getPrice()
 					.multiply(new BigDecimal(dreesing.getWeight()), MathContext.DECIMAL64)).divide(
-							new BigDecimal(IngredientConstant.PRICE_MILLILITER_MEASURE), MathContext.DECIMAL64));
+							new BigDecimal(GlobalConstants.PRICE_MILLILITER_MEASURE), MathContext.DECIMAL64));
 		}
 		return dressingsPrice;
 	}

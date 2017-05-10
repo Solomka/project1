@@ -2,6 +2,7 @@ package ua.training.chef.model.dressing;
 
 import java.math.BigDecimal;
 
+import ua.training.chef.view.View;
 import ua.training.chef.view.ViewMessage;
 
 public class SourCream extends Dressing {
@@ -44,7 +45,7 @@ public class SourCream extends Dressing {
 	@Override
 	public String toString() {
 		return new StringBuilder(super.toString()).append(ViewMessage.COMMA).append(ViewMessage.EMPTY_STR)
-				.append(ViewMessage.FAT).append(ViewMessage.COLON).append(ViewMessage.EMPTY_STR).append(getFat())
-				.toString();
+				.append(View.BUNDLE.getString(ViewMessage.FAT)).append(ViewMessage.COLON).append(ViewMessage.EMPTY_STR)
+				.append(getFat()).toString();
 	}
 }
