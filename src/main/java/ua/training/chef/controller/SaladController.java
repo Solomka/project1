@@ -51,7 +51,7 @@ public class SaladController {
 
 	private void showSaladDetails(Salad salad) {
 		view.printSaladDetails(salad);
-	}
+		}
 
 	public void findSaladVegetablesInCaloriesRange(Salad salad) {
 		view.printSearchVegetablesInCaloriesRangeMessage();

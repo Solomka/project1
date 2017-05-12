@@ -22,9 +22,9 @@ public abstract class Salad {
 		this.dressings = prepareSaladDressings();
 	}
 
-	public abstract Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables();
+	protected abstract Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables();
 
-	public abstract Set<SaladIngredient<Dressing>> prepareSaladDressings();
+	protected abstract Set<SaladIngredient<Dressing>> prepareSaladDressings();
 
 	public Set<SortableSaladIngredient<Vegetable>> getVegetables() {
 		return vegetables;
@@ -109,8 +109,8 @@ public abstract class Salad {
 
 		for (SaladIngredient<Dressing> dreesing : dressings) {
 			dressingsPrice = dressingsPrice.add((dreesing.getIngredient().getPrice()
-					.multiply(new BigDecimal(dreesing.getWeight()), MathContext.DECIMAL64)).divide(
-							new BigDecimal(GlobalConstants.PRICE_MILLILITER_MEASURE), MathContext.DECIMAL64));
+					.multiply(new BigDecimal(dreesing.getWeight()), MathContext.DECIMAL64))
+							.divide(new BigDecimal(GlobalConstants.PRICE_MILLILITER_MEASURE), MathContext.DECIMAL64));
 		}
 		return dressingsPrice;
 	}

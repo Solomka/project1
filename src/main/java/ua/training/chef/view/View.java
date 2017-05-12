@@ -62,7 +62,6 @@ public class View {
 
 	public void printSaladDetails(final Salad salad) {
 		Objects.requireNonNull(salad);
-
 		printReadyInfo(salad.getClass().getSimpleName());
 		printSaladCalories(salad.getSaladCalories());
 		printSaladPrice(salad.getSaladPrice());

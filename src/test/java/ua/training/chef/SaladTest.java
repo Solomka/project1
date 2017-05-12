@@ -89,7 +89,7 @@ public class SaladTest {
 	private static class TestingSaladSubclass extends Salad {
 
 		@Override
-		public Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
+		protected Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
 			Set<SortableSaladIngredient<Vegetable>> testSaladIngredients = new HashSet<SortableSaladIngredient<Vegetable>>();
 
 			testSaladIngredients.add(
@@ -103,7 +103,7 @@ public class SaladTest {
 		}
 
 		@Override
-		public Set<SaladIngredient<Dressing>> prepareSaladDressings() {
+		protected Set<SaladIngredient<Dressing>> prepareSaladDressings() {
 			Set<SaladIngredient<Dressing>> testSaladDressings = new HashSet<SaladIngredient<Dressing>>();
 
 			testSaladDressings.add(new SaladIngredient<Dressing>(new Oil("Olive oil", 884, new BigDecimal(230)), 15));
