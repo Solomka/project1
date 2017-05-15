@@ -11,4 +11,6 @@ public interface GlobalConstants {
 	int PRICE_MILLILITER_MEASURE = 1000;
 
 	BigDecimal SALAD_EXTRA_PRICE = BigDecimal.ONE;
+	
+	double TWO_DIGITS_AFTER_DECIMAL_POINT = 100;
 }

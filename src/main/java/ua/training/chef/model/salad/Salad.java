@@ -57,7 +57,8 @@ public abstract class Salad {
 		generalSaladCalories += getGeneralVegetablesCalories();
 		generalSaladCalories += getGeneralDressingsCalories();
 
-		return Math.floor(generalSaladCalories * 100) / 100;
+		return Math.floor(generalSaladCalories * GlobalConstants.TWO_DIGITS_AFTER_DECIMAL_POINT)
+				/ GlobalConstants.TWO_DIGITS_AFTER_DECIMAL_POINT;
 	}
 
 	private double getGeneralVegetablesCalories() {
