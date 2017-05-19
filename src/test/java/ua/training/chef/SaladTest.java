@@ -9,13 +9,13 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import ua.training.chef.model.ingredients.Dressing;
+import ua.training.chef.model.ingredients.DressingType;
+import ua.training.chef.model.ingredients.Vegetable;
+import ua.training.chef.model.ingredients.VegetableType;
 import ua.training.chef.model.salad.Salad;
-import ua.training.chef.model.salad.ingredient.Dressing;
-import ua.training.chef.model.salad.ingredient.DressingType;
 import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
-import ua.training.chef.model.salad.ingredient.Vegetable;
-import ua.training.chef.model.salad.ingredient.VegetableType;
 
 public class SaladTest {
 

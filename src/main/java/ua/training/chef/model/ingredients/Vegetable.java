@@ -1,4 +1,4 @@
-package ua.training.chef.model.salad.ingredient;
+package ua.training.chef.model.ingredients;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -8,29 +8,29 @@ import ua.training.chef.utils.Builder;
 import ua.training.chef.view.ViewLocale;
 import ua.training.chef.view.ViewMessage;
 
-public class Dressing {
+public class Vegetable implements Comparable<Vegetable> {
 
-	private DressingType type;
+	private VegetableType type;
 	private String subType;
 	private double calories;
 	private BigDecimal price;
 
-	public static class DressingBuilder implements Builder<Dressing> {
+	public static class VegetableBuilder implements Builder<Vegetable> {
 
-		private DressingType type;
+		private VegetableType type;
 		private String subType;
 		private double calories;
 		private BigDecimal price;
 
-		public DressingBuilder() {
+		public VegetableBuilder() {
 
 		}
 
-		public DressingType getType() {
+		public VegetableType getType() {
 			return type;
 		}
 
-		public DressingBuilder setType(DressingType type) {
+		public VegetableBuilder setType(VegetableType type) {
 			this.type = type;
 			return this;
 		}
@@ -39,7 +39,7 @@ public class Dressing {
 			return subType;
 		}
 
-		public DressingBuilder setSubType(String subType) {
+		public VegetableBuilder setSubType(String subType) {
 			this.subType = subType;
 			return this;
 		}
@@ -48,7 +48,7 @@ public class Dressing {
 			return calories;
 		}
 
-		public DressingBuilder setCalories(double calories) {
+		public VegetableBuilder setCalories(double calories) {
 			this.calories = calories;
 			return this;
 		}
@@ -57,25 +57,64 @@ public class Dressing {
 			return price;
 		}
 
-		public DressingBuilder setPrice(BigDecimal price) {
+		public VegetableBuilder setPrice(BigDecimal price) {
 			this.price = price;
 			return this;
 		}
 
 		@Override
-		public Dressing build() {
-			return new Dressing(this);
+		public Vegetable build() {
+			return new Vegetable(this);
 		}
-
 	}
 
-	private Dressing(DressingBuilder builder) {
+	private Vegetable(VegetableBuilder builder) {
 		Objects.requireNonNull(builder);
 
 		this.type = Objects.requireNonNull(builder.getType());
 		this.subType = Objects.requireNonNull(builder.getSubType());
 		this.calories = builder.getCalories();
 		this.price = Objects.requireNonNull(builder.getPrice());
+	}
+
+	public String getSubType() {
+		return subType;
+	}
+
+	public void setSubType(String subType) {
+		this.subType = subType;
+	}
+
+	public VegetableType getType() {
+		return type;
+	}
+
+	public void setType(VegetableType type) {
+		this.type = type;
+	}
+
+	public double getCalories() {
+		return calories;
+	}
+
+	public void setCalories(double calories) {
+		this.calories = calories;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	@Override
+	public int compareTo(Vegetable another) {
+		if (calories == another.calories) {
+			return 0;
+		}
+		return (calories > another.calories) ? 1 : -1;
 	}
 
 	/*
@@ -102,7 +141,7 @@ public class Dressing {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Dressing other = (Dressing) obj;
+		Vegetable other = (Vegetable) obj;
 		if (Double.doubleToLongBits(calories) != Double.doubleToLongBits(other.calories))
 			return false;
 		if (subType == null) {
@@ -115,50 +154,20 @@ public class Dressing {
 		return true;
 	}
 
-	public DressingType getType() {
-		return type;
-	}
-
-	public void setType(DressingType type) {
-		this.type = type;
-	}
-
-	public String getSubType() {
-		return subType;
-	}
-
-	public void setSubType(String subType) {
-		this.subType = subType;
-	}
-
-	public double getCalories() {
-		return calories;
-	}
-
-	public void setCalories(double calories) {
-		this.calories = calories;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
 	@Override
 	public String toString() {
-		return new StringBuilder(getType().toString()).append(ViewMessage.EQUALITY_SIGN).append(ViewMessage.EMPTY_STR)
+
+		return new StringBuilder(getType().getValue()).append(ViewMessage.EQUALITY_SIGN).append(ViewMessage.EMPTY_STR)
 				.append(ViewLocale.BUNDLE.getString(ViewMessage.SUBTYPE)).append(ViewMessage.COLON)
 				.append(ViewMessage.EMPTY_STR).append(getSubType()).append(ViewMessage.COMMA)
 				.append(ViewMessage.EMPTY_STR).append(ViewLocale.BUNDLE.getString(ViewMessage.CALORIES))
 				.append(ViewMessage.COLON).append(ViewMessage.EMPTY_STR).append(getCalories())
 				.append(ViewMessage.EMPTY_STR)
-				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.CALORIC_VALUE_MILLILITER_MEASURE))
+				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.CALORIC_VALUE_GRAM_MEASURE))
 				.append(ViewMessage.COMMA).append(ViewMessage.EMPTY_STR)
 				.append(ViewLocale.BUNDLE.getString(ViewMessage.PRICE)).append(ViewMessage.COLON)
 				.append(ViewMessage.EMPTY_STR).append(getPrice()).append(ViewMessage.EMPTY_STR)
-				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.PRICE_MILLILITER_MEASURE)).toString();
+				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.PRICE_GRAM_MEASURE)).toString();
 	}
+
 }

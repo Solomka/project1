@@ -42,6 +42,20 @@ public interface ViewMessage {
 	String PER = "per";
 	String MEASURE = "g/ml";
 
+	/* Vegetables/ Ingredients */
+	String OIL = "chef.input.oil";
+	String VINEGAR = "chef.input.vinegar";
+	String SOURCREAM = "chef.input.sourcream";
+
+	String CARROT = "chef.input.carrot";
+	String CUCUMBER = "chef.input.cucumber";
+	String LETTUCE = "chef.input.lettuce";
+	String OLIVE = "chef.input.olive";
+	String ONION = "chef.input.onion";
+	String PEPPER = "chef.input.pepper";
+	String RADISH = "chef.input.radish";
+	String TOMATO = "chef.input.tomato";
+
 	/* Utility strings */
 	String LEFT_PARENTHESIS = "{ ";
 	String RIGHT_PARANTHESIS = " }";

@@ -4,9 +4,9 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 
+import ua.training.chef.model.ingredients.Vegetable;
 import ua.training.chef.model.salad.Salad;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
-import ua.training.chef.model.salad.ingredient.Vegetable;
 import ua.training.chef.service.SaladCreationService;
 import ua.training.chef.view.View;
 import ua.training.chef.view.ViewLocale;
