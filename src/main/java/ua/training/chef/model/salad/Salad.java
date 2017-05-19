@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import ua.training.chef.constants.GlobalConstants;
-import ua.training.chef.model.dressing.Dressing;
+import ua.training.chef.model.salad.ingredient.Dressing;
 import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
-import ua.training.chef.model.vegetable.Vegetable;
+import ua.training.chef.model.salad.ingredient.Vegetable;
 
 public abstract class Salad {
 
@@ -146,5 +146,4 @@ public abstract class Salad {
 			return false;
 		return true;
 	}
-
 }

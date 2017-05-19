@@ -4,16 +4,12 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import ua.training.chef.model.dressing.Dressing;
-import ua.training.chef.model.dressing.Oil;
+import ua.training.chef.model.salad.ingredient.Dressing;
+import ua.training.chef.model.salad.ingredient.DressingType;
 import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
-import ua.training.chef.model.vegetable.Cucumber;
-import ua.training.chef.model.vegetable.Olive;
-import ua.training.chef.model.vegetable.Onion;
-import ua.training.chef.model.vegetable.Pepper;
-import ua.training.chef.model.vegetable.Tomato;
-import ua.training.chef.model.vegetable.Vegetable;
+import ua.training.chef.model.salad.ingredient.Vegetable;
+import ua.training.chef.model.salad.ingredient.VegetableType;
 
 public class SpringSalad extends Salad {
 
@@ -26,15 +22,20 @@ public class SpringSalad extends Salad {
 		Set<SortableSaladIngredient<Vegetable>> greekSaladIngredients = new HashSet<SortableSaladIngredient<Vegetable>>();
 
 		greekSaladIngredients.add(
-				new SortableSaladIngredient<Vegetable>(new Cucumber("Ordinar cucumber", 15.5, new BigDecimal(30)), 50));
-		greekSaladIngredients
-				.add(new SortableSaladIngredient<Vegetable>(new Tomato("Cherry tomato", 18, new BigDecimal(80)), 85));
-		greekSaladIngredients
-				.add(new SortableSaladIngredient<Vegetable>(new Olive("Black olive", 115, new BigDecimal(180)), 40));
+				new SortableSaladIngredient<Vegetable>(new Vegetable.VegetableBuilder().setType(VegetableType.CUCUMBER)
+						.setSubType("Ordinar cucumber").setCalories(15.5).setPrice(new BigDecimal(30)).build(), 50));
 		greekSaladIngredients.add(
-				new SortableSaladIngredient<Vegetable>(new Pepper("Green Bell pepper", 20.1, new BigDecimal(80)), 50));
-		greekSaladIngredients
-				.add(new SortableSaladIngredient<Vegetable>(new Onion("Leek onion", 60.9, new BigDecimal(100)), 15));
+				new SortableSaladIngredient<Vegetable>(new Vegetable.VegetableBuilder().setType(VegetableType.TOMATO)
+						.setSubType("Cherry tomato").setCalories(18).setPrice(new BigDecimal(80)).build(), 85));
+		greekSaladIngredients.add(
+				new SortableSaladIngredient<Vegetable>(new Vegetable.VegetableBuilder().setType(VegetableType.OLIVE)
+						.setSubType("Black olive").setCalories(115).setPrice(new BigDecimal(180)).build(), 40));
+		greekSaladIngredients.add(
+				new SortableSaladIngredient<Vegetable>(new Vegetable.VegetableBuilder().setType(VegetableType.PEPPER)
+						.setSubType("Green Bell pepper").setCalories(20.1).setPrice(new BigDecimal(80)).build(), 50));
+		greekSaladIngredients.add(
+				new SortableSaladIngredient<Vegetable>(new Vegetable.VegetableBuilder().setType(VegetableType.OLIVE)
+						.setSubType("Leek onion").setCalories(60.9).setPrice(new BigDecimal(100)).build(), 15));
 
 		return greekSaladIngredients;
 	}
@@ -43,7 +44,8 @@ public class SpringSalad extends Salad {
 	protected Set<SaladIngredient<Dressing>> prepareSaladDressings() {
 		Set<SaladIngredient<Dressing>> greekSaladDressings = new HashSet<SaladIngredient<Dressing>>();
 
-		greekSaladDressings.add(new SaladIngredient<Dressing>(new Oil("Olive oil", 884, new BigDecimal(230)), 30));
+		greekSaladDressings.add(new SaladIngredient<Dressing>(new Dressing.DressingBuilder().setType(DressingType.OIL)
+				.setSubType("Olive oil").setCalories(884).setPrice(new BigDecimal(230)).build(), 30));
 
 		return greekSaladDressings;
 	}
