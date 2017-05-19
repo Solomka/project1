@@ -9,15 +9,13 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import ua.training.chef.model.dressing.Dressing;
-import ua.training.chef.model.dressing.Oil;
 import ua.training.chef.model.salad.Salad;
+import ua.training.chef.model.salad.ingredient.Dressing;
+import ua.training.chef.model.salad.ingredient.DressingType;
 import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
-import ua.training.chef.model.vegetable.Lettuce;
-import ua.training.chef.model.vegetable.Olive;
-import ua.training.chef.model.vegetable.Tomato;
-import ua.training.chef.model.vegetable.Vegetable;
+import ua.training.chef.model.salad.ingredient.Vegetable;
+import ua.training.chef.model.salad.ingredient.VegetableType;
 
 public class SaladTest {
 
@@ -92,12 +90,17 @@ public class SaladTest {
 		protected Set<SortableSaladIngredient<Vegetable>> prepareSaladVegetables() {
 			Set<SortableSaladIngredient<Vegetable>> testSaladIngredients = new HashSet<SortableSaladIngredient<Vegetable>>();
 
-			testSaladIngredients.add(
-					new SortableSaladIngredient<Vegetable>(new Tomato("Cherry tomato", 18, new BigDecimal(80)), 85));
-			testSaladIngredients.add(
-					new SortableSaladIngredient<Vegetable>(new Olive("Black olive", 115, new BigDecimal(180)), 40));
 			testSaladIngredients.add(new SortableSaladIngredient<Vegetable>(
-					new Lettuce("Iceberg lettuce", 14.8, new BigDecimal(80)), 80));
+					new Vegetable.VegetableBuilder().setType(VegetableType.TOMATO).setSubType("Cherry tomato")
+							.setCalories(18).setPrice(new BigDecimal(80)).build(),
+					85));
+			testSaladIngredients.add(
+					new SortableSaladIngredient<Vegetable>(new Vegetable.VegetableBuilder().setType(VegetableType.OLIVE)
+							.setSubType("Black olive").setCalories(115).setPrice(new BigDecimal(180)).build(), 40));
+			testSaladIngredients.add(new SortableSaladIngredient<Vegetable>(
+					new Vegetable.VegetableBuilder().setType(VegetableType.LETTUCE).setSubType("Iceberg lettuce")
+							.setCalories(14.8).setPrice(new BigDecimal(80)).build(),
+					80));
 
 			return testSaladIngredients;
 		}
@@ -106,9 +109,12 @@ public class SaladTest {
 		protected Set<SaladIngredient<Dressing>> prepareSaladDressings() {
 			Set<SaladIngredient<Dressing>> testSaladDressings = new HashSet<SaladIngredient<Dressing>>();
 
-			testSaladDressings.add(new SaladIngredient<Dressing>(new Oil("Olive oil", 884, new BigDecimal(230)), 15));
 			testSaladDressings
-					.add(new SaladIngredient<Dressing>(new Oil("Sunflower oil", 884.1, new BigDecimal(100)), 15));
+					.add(new SaladIngredient<Dressing>(new Dressing.DressingBuilder().setType(DressingType.OIL)
+							.setSubType("Olive oil").setCalories(884).setPrice(new BigDecimal(230)).build(), 15));
+			testSaladDressings
+					.add(new SaladIngredient<Dressing>(new Dressing.DressingBuilder().setType(DressingType.OIL)
+							.setSubType("Sunflower oil").setCalories(884.1).setPrice(new BigDecimal(100)).build(), 15));
 
 			return testSaladDressings;
 		}
@@ -118,14 +124,18 @@ public class SaladTest {
 			Set<SortableSaladIngredient<Vegetable>> sortedVegetables = new LinkedHashSet<>();
 
 			sortedVegetables.add(new SortableSaladIngredient<Vegetable>(
-					new Lettuce("Iceberg lettuce", 14.8, new BigDecimal(80)), 80));
+					new Vegetable.VegetableBuilder().setType(VegetableType.LETTUCE).setSubType("Iceberg lettuce")
+							.setCalories(14.8).setPrice(new BigDecimal(80)).build(),
+					80));
+			sortedVegetables.add(new SortableSaladIngredient<Vegetable>(
+					new Vegetable.VegetableBuilder().setType(VegetableType.TOMATO).setSubType("Cherry tomato")
+							.setCalories(18).setPrice(new BigDecimal(80)).build(),
+					85));
 			sortedVegetables.add(
-					new SortableSaladIngredient<Vegetable>(new Tomato("Cherry tomato", 18, new BigDecimal(80)), 85));
-			sortedVegetables.add(
-					new SortableSaladIngredient<Vegetable>(new Olive("Black olive", 115, new BigDecimal(180)), 40));
+					new SortableSaladIngredient<Vegetable>(new Vegetable.VegetableBuilder().setType(VegetableType.OLIVE)
+							.setSubType("Black olive").setCalories(115).setPrice(new BigDecimal(180)).build(), 40));
 
 			return sortedVegetables;
-
 		}
 
 		@Override

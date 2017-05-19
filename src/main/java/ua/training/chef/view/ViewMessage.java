@@ -34,6 +34,7 @@ public interface ViewMessage {
 	String SALAD_FACTORY_ERROR_MSG = "Such salad is not served in our salad restaurant";
 
 	String TYPE = "chef.input.type";
+	String SUBTYPE = "chef.input.sybtype";
 	String CALORIES = "chef.input.calories";
 	String PRICE = "chef.input.price";
 	String FAT = "chef.input.fat";
