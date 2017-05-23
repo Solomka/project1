@@ -32,7 +32,8 @@ public interface ViewMessage {
 
 	String WRONG_INPUT = "chef.input.wrongInput";
 	String SALAD_FACTORY_ERROR_MSG = "Such salad is not served in our salad restaurant";
-
+	String SALAD_TYPE_VALUE_ERROR_MSG = "Salad type with such value doesn't exist";
+	
 	String TYPE = "chef.input.type";
 	String SUBTYPE = "chef.input.sybtype";
 	String CALORIES = "chef.input.calories";

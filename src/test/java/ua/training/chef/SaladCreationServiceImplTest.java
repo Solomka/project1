@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import ua.training.chef.model.salad.PeasantSalad;
 import ua.training.chef.model.salad.Salad;
+import ua.training.chef.model.salad.SaladType;
 import ua.training.chef.model.salad.SpringSalad;
 import ua.training.chef.model.salad.VitaminSalad;
 import ua.training.chef.service.SaladCreationService;
@@ -16,7 +17,7 @@ public class SaladCreationServiceImplTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testCreateSaladIllegalArgumentException() {
 		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
-		saladCreationService.createSalad(12);
+		saladCreationService.createSalad(SaladType.getSaladTypeByValue(12));
 	}
 
 	@Test
@@ -24,7 +25,7 @@ public class SaladCreationServiceImplTest {
 		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
 
 		SpringSalad expectedSalad = new SpringSalad();
-		Salad actualSalad = saladCreationService.createSalad(1);
+		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(1));
 
 		assertEquals(expectedSalad, actualSalad);
 
@@ -35,7 +36,7 @@ public class SaladCreationServiceImplTest {
 		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
 
 		VitaminSalad expectedSalad = new VitaminSalad();
-		Salad actualSalad = saladCreationService.createSalad(2);
+		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(1));
 
 		assertEquals(expectedSalad, actualSalad);
 
@@ -46,7 +47,7 @@ public class SaladCreationServiceImplTest {
 		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
 
 		PeasantSalad expectedSalad = new PeasantSalad();
-		Salad actualSalad = saladCreationService.createSalad(3);
+		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(1));
 
 		assertEquals(expectedSalad, actualSalad);
 

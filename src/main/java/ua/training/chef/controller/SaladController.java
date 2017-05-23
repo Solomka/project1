@@ -1,12 +1,12 @@
 package ua.training.chef.controller;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.Set;
 
 import ua.training.chef.model.ingredients.Vegetable;
 import ua.training.chef.model.salad.Salad;
-import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
+import ua.training.chef.model.salad.SaladType;
 import ua.training.chef.service.SaladCreationService;
 import ua.training.chef.view.View;
 import ua.training.chef.view.ViewLocale;
@@ -37,7 +37,7 @@ public class SaladController {
 				ViewLocale.BUNDLE.getString(ViewMessage.INSTRUCTION) + ViewMessage.NEW_LINE + view.getSaladMenu(),
 				RegexContainer.SALAD_NUMBER_REGEX));
 
-		Salad salad = saladCreationService.createSalad(userSaladSelection);
+		Salad salad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(userSaladSelection));
 
 		showSaladDetails(salad);
 		findSaladVegetablesInCaloriesRange(salad);
@@ -62,7 +62,7 @@ public class SaladController {
 						RegexContainer.CALORIC_RANGE_REGEX))))) {
 			view.printWrongInput();
 		}
-		Set<SortableSaladIngredient<Vegetable>> vegetablesInCaloricRange = salad.getVegetablesInCaloriesRange(
+		Map<Vegetable, Double> vegetablesInCaloricRange = salad.getVegetablesInCaloriesRange(
 				Double.parseDouble(minCaloriesValue), Double.parseDouble(maxCaloriesValue));
 
 		view.printSaladVegetables(ViewLocale.BUNDLE.getString(ViewMessage.VEGETABLES), vegetablesInCaloricRange);

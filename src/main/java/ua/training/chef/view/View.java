@@ -1,14 +1,12 @@
 package ua.training.chef.view;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
-import ua.training.chef.model.ingredients.Dressing;
+import ua.training.chef.constants.GlobalConstants;
 import ua.training.chef.model.ingredients.Vegetable;
 import ua.training.chef.model.salad.Salad;
-import ua.training.chef.model.salad.ingredient.SaladIngredient;
-import ua.training.chef.model.salad.ingredient.SortableSaladIngredient;
 
 /**
  * 
@@ -56,7 +54,6 @@ public class View {
 		printSaladPrice(salad.getSaladPrice());
 		printSaladVegetables(ViewLocale.BUNDLE.getString(ViewMessage.SORTED_VEGETABLES),
 				salad.getSortedSaladVegetables());
-		printSaladDressings(ViewLocale.BUNDLE.getString(ViewMessage.DRESSINGS), salad.getDressings());
 	}
 
 	private void printReadyInfo(String saladName) {
@@ -71,21 +68,13 @@ public class View {
 		printMessage(ViewLocale.BUNDLE.getString(ViewMessage.SALAD_PRICE), saladPrice.toString());
 	}
 
-	public void printSaladVegetables(String message, Set<SortableSaladIngredient<Vegetable>> saladVegetables) {
+	public void printSaladVegetables(String message, Map<Vegetable, Double> saladVegetables) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		for (SortableSaladIngredient<Vegetable> vegetable : saladVegetables) {
-			stringBuilder.append(vegetable.toString()).append(ViewMessage.NEW_LINE);
-		}
-
-		printMessage(message, ViewMessage.NEW_LINE, stringBuilder.toString());
-	}
-
-	private void printSaladDressings(String message, Set<SaladIngredient<Dressing>> saladDressings) {
-		StringBuilder stringBuilder = new StringBuilder();
-
-		for (SaladIngredient<Dressing> dressing : saladDressings) {
-			stringBuilder.append(dressing.toString()).append(ViewMessage.NEW_LINE);
+		for (Vegetable vegetable : saladVegetables.keySet()) {
+			stringBuilder.append(vegetable.toString()).append(ViewMessage.EMPTY_STR)
+					.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.CALORIC_VALUE_GRAM_MEASURE))
+					.append(ViewMessage.NEW_LINE);
 		}
 
 		printMessage(message, ViewMessage.NEW_LINE, stringBuilder.toString());

@@ -1,6 +1,7 @@
 package ua.training.chef.model.ingredients;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Objects;
 
 import ua.training.chef.constants.GlobalConstants;
@@ -107,6 +108,24 @@ public class Vegetable implements Comparable<Vegetable> {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public double calculateCaloriesPerWeight(double weight) {
+		double caloriesPerWeight = 0.0;
+
+		caloriesPerWeight = (getCalories() * weight) / GlobalConstants.CALORIC_VALUE_GRAM_MEASURE;
+
+		return Math.floor(caloriesPerWeight * GlobalConstants.TWO_DIGITS_AFTER_DECIMAL_POINT)
+				/ GlobalConstants.TWO_DIGITS_AFTER_DECIMAL_POINT;
+	}
+
+	public BigDecimal calculatePricePerWeight(double weight) {
+		BigDecimal pricePerWeight = BigDecimal.ZERO;
+
+		pricePerWeight = pricePerWeight.add(getPrice().multiply(new BigDecimal(weight), MathContext.DECIMAL64))
+				.divide(new BigDecimal(GlobalConstants.PRICE_GRAM_MEASURE), MathContext.DECIMAL64);
+
+		return pricePerWeight;
 	}
 
 	@Override
