@@ -4,7 +4,7 @@ import ua.training.chef.view.ViewMessage;
 
 public enum SaladType {
 
-	PEASANT_SALAD(1), SPRING_SALAD(2), VITAMIN_SALAD(3);
+	SPRING_SALAD(1), VITAMIN_SALAD(2), PEASANT_SALAD(3);
 
 	private int value;
 

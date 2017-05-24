@@ -112,12 +112,8 @@ public class Vegetable implements Comparable<Vegetable> {
 	}
 
 	public double calculateCaloriesPerWeight(double weight) {
-		double caloriesPerWeight = 0.0;
 
-		caloriesPerWeight = (getCalories() * weight) / GlobalConstants.CALORIC_VALUE_GRAM_MEASURE;
-
-		return Math.floor(caloriesPerWeight * GlobalConstants.TWO_DIGITS_AFTER_DECIMAL_POINT)
-				/ GlobalConstants.TWO_DIGITS_AFTER_DECIMAL_POINT;
+		return (getCalories() * weight) / GlobalConstants.CALORIC_VALUE_GRAM_MEASURE;
 	}
 
 	public BigDecimal calculatePricePerWeight(double weight) {

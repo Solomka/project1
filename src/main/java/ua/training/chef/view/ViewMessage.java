@@ -29,7 +29,7 @@ public interface ViewMessage {
 	String MAX_CALORIC_VALUE = "chef.input.maxCaloriesValue";
 
 	String FIRST_MENU_ITEM = "chef.input.firstMenuItem";
-	String SECOND_MENU_ITEM = "chef.input.seconMenuItem";
+	String SECOND_MENU_ITEM = "chef.input.secondMenuItem";
 	String THIRD_MENU_ITEM = "chef.input.thirdMenuItem";
 
 	String WRONG_INPUT = "chef.input.wrongInput";

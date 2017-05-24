@@ -65,4 +65,31 @@ public abstract class Salad {
 		return generalSaladPrice;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((vegetables == null) ? 0 : vegetables.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Salad other = (Salad) obj;
+		if (vegetables == null) {
+			if (other.vegetables != null)
+				return false;
+		} else if (!vegetables.equals(other.vegetables))
+			return false;
+		return true;
+	}
+	
+	
+
 }

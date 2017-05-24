@@ -36,7 +36,7 @@ public class SaladCreationServiceImplTest {
 		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
 
 		VitaminSalad expectedSalad = new VitaminSalad();
-		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(1));
+		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(2));
 
 		assertEquals(expectedSalad, actualSalad);
 
@@ -47,7 +47,7 @@ public class SaladCreationServiceImplTest {
 		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
 
 		PeasantSalad expectedSalad = new PeasantSalad();
-		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(1));
+		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(3));
 
 		assertEquals(expectedSalad, actualSalad);
 
