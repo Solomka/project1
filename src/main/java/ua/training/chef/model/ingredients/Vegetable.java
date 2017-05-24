@@ -8,6 +8,7 @@ import ua.training.chef.constants.GlobalConstants;
 import ua.training.chef.utils.Builder;
 import ua.training.chef.view.ViewLocale;
 import ua.training.chef.view.ViewMessage;
+import ua.training.chef.view.utils.ViewMessageUtils;
 
 public class Vegetable implements Comparable<Vegetable> {
 
@@ -176,16 +177,16 @@ public class Vegetable implements Comparable<Vegetable> {
 	@Override
 	public String toString() {
 
-		return new StringBuilder(getType().getValue()).append(ViewMessage.EQUALITY_SIGN).append(ViewMessage.EMPTY_STR)
-				.append(ViewLocale.BUNDLE.getString(ViewMessage.SUBTYPE)).append(ViewMessage.COLON)
-				.append(ViewMessage.EMPTY_STR).append(getSubType()).append(ViewMessage.COMMA)
-				.append(ViewMessage.EMPTY_STR).append(ViewLocale.BUNDLE.getString(ViewMessage.CALORIES))
-				.append(ViewMessage.COLON).append(ViewMessage.EMPTY_STR).append(getCalories())
-				.append(ViewMessage.EMPTY_STR)
+		return new StringBuilder(getType().getValue()).append(ViewMessageUtils.EQUALITY_SIGN)
+				.append(ViewMessageUtils.EMPTY_STR).append(ViewLocale.BUNDLE.getString(ViewMessage.SUBTYPE))
+				.append(ViewMessageUtils.COLON).append(ViewMessageUtils.EMPTY_STR).append(getSubType())
+				.append(ViewMessageUtils.COMMA).append(ViewMessageUtils.EMPTY_STR)
+				.append(ViewLocale.BUNDLE.getString(ViewMessage.CALORIES)).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(getCalories()).append(ViewMessageUtils.EMPTY_STR)
 				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.CALORIC_VALUE_GRAM_MEASURE))
-				.append(ViewMessage.COMMA).append(ViewMessage.EMPTY_STR)
-				.append(ViewLocale.BUNDLE.getString(ViewMessage.PRICE)).append(ViewMessage.COLON)
-				.append(ViewMessage.EMPTY_STR).append(getPrice()).append(ViewMessage.EMPTY_STR)
+				.append(ViewMessageUtils.COMMA).append(ViewMessageUtils.EMPTY_STR)
+				.append(ViewLocale.BUNDLE.getString(ViewMessage.PRICE)).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(getPrice()).append(ViewMessageUtils.EMPTY_STR)
 				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.PRICE_GRAM_MEASURE)).toString();
 	}
 

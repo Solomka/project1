@@ -11,6 +11,7 @@ import ua.training.chef.service.SaladCreationService;
 import ua.training.chef.view.View;
 import ua.training.chef.view.ViewLocale;
 import ua.training.chef.view.ViewMessage;
+import ua.training.chef.view.utils.ViewMessageUtils;
 
 public class SaladController {
 
@@ -34,7 +35,7 @@ public class SaladController {
 
 	private void processUserSaladSelection() {
 		int userSaladSelection = Integer.parseInt(UserInputProcessUtility.readUserInput(scanner, view,
-				ViewLocale.BUNDLE.getString(ViewMessage.INSTRUCTION) + ViewMessage.NEW_LINE + view.getSaladMenu(),
+				ViewLocale.BUNDLE.getString(ViewMessage.INSTRUCTION) + ViewMessageUtils.NEW_LINE + view.getSaladMenu(),
 				RegexContainer.SALAD_NUMBER_REGEX));
 
 		Salad salad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(userSaladSelection));
