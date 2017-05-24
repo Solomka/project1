@@ -1,5 +1,7 @@
 package ua.training.chef.view;
 
+import ua.training.chef.view.utils.ViewMessageUtils;
+
 /**
  * interface that represents messages and its parts that are shown to the user
  * 
@@ -32,6 +34,7 @@ public interface ViewMessage {
 
 	String WRONG_INPUT = "chef.input.wrongInput";
 	String SALAD_FACTORY_ERROR_MSG = "Such salad is not served in our salad restaurant";
+	String SALAD_TYPE_VALUE_ERROR_MSG = "Salad type with such value doesn't exist";
 
 	String TYPE = "chef.input.type";
 	String SUBTYPE = "chef.input.sybtype";
@@ -40,7 +43,7 @@ public interface ViewMessage {
 	String FAT = "chef.input.fat";
 	String WEIGHT = "chef.input.weight";
 	String PER = "per";
-	String MEASURE = "g/ml";
+	String MEASURE = "g";
 
 	/* Vegetables/ Ingredients */
 	String OIL = "chef.input.oil";
@@ -56,21 +59,8 @@ public interface ViewMessage {
 	String RADISH = "chef.input.radish";
 	String TOMATO = "chef.input.tomato";
 
-	/* Utility strings */
-	String LEFT_PARENTHESIS = "{ ";
-	String RIGHT_PARANTHESIS = " }";
-	String COMMA = ", ";
-	String FULL_STOP = ".";
-	String COLON = ": ";
-	String EMPTY_STR = " ";
-	String NEW_LINE = "\n";
-	String BACKSLASH = "/";
-	String SEMICOLON = ";";
-	String VERT_LINA = " |";
-	String EQUALITY_SIGN = " = ";
-
 	static String getUnitOfMeasurement(int measurementValue) {
-		return new StringBuilder(PER).append(EMPTY_STR).append(measurementValue).append(MEASURE).toString();
+		return new StringBuilder(PER).append(ViewMessageUtils.EMPTY_STR).append(measurementValue).append(MEASURE).toString();
 	}
 
 }
