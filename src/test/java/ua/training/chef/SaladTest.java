@@ -9,8 +9,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import ua.training.chef.model.ingredients.Vegetable;
-import ua.training.chef.model.ingredients.VegetableType;
+import ua.training.chef.model.ingredient.Vegetable;
+import ua.training.chef.model.ingredient.VegetableType;
 import ua.training.chef.model.salad.Salad;
 
 public class SaladTest {

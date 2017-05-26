@@ -2,8 +2,8 @@ package ua.training.chef.service;
 
 import ua.training.chef.model.salad.Salad;
 import ua.training.chef.model.salad.SaladType;
-import ua.training.chef.model.saladfactory.SaladFactory;
-import ua.training.chef.model.saladfactory.SaladFactoryImpl;
+import ua.training.chef.model.salad_factory.SaladFactory;
+import ua.training.chef.model.salad_factory.SaladFactoryImpl;
 
 public class SaladCreationServiceImpl implements SaladCreationService {
 

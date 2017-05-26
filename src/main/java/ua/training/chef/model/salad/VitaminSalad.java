@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import ua.training.chef.model.ingredients.Vegetable;
-import ua.training.chef.model.ingredients.VegetableType;
+import ua.training.chef.model.ingredient.Vegetable;
+import ua.training.chef.model.ingredient.VegetableType;
 
 public class VitaminSalad extends Salad {
 

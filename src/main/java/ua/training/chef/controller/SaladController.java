@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
-import ua.training.chef.model.ingredients.Vegetable;
+import ua.training.chef.model.ingredient.Vegetable;
 import ua.training.chef.model.salad.Salad;
 import ua.training.chef.model.salad.SaladType;
 import ua.training.chef.service.SaladCreationService;

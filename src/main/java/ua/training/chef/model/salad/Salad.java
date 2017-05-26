@@ -7,14 +7,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import ua.training.chef.constants.GlobalConstants;
-import ua.training.chef.model.ingredients.Vegetable;
+import ua.training.chef.model.ingredient.Vegetable;
 
 public abstract class Salad {
 
-	protected Map<Vegetable, Double> vegetables = new HashMap<>();
+	protected Map<Vegetable, Double> vegetables;
 
 	public Salad() {
-		vegetables = prepareSaladVegetables();
+		vegetables = prepareSaladVegetables();		
 	}
 
 	protected abstract Map<Vegetable, Double> prepareSaladVegetables();
@@ -88,8 +88,6 @@ public abstract class Salad {
 		} else if (!vegetables.equals(other.vegetables))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 
 }
