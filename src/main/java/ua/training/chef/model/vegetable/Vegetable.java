@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 
 import ua.training.chef.constants.GlobalConstants;
+import ua.training.chef.model.vegetable.characteristic.VegetableType;
 import ua.training.chef.view.ViewLocale;
 import ua.training.chef.view.ViewMessage;
 import ua.training.chef.view.utils.ViewMessageUtils;
@@ -90,7 +91,7 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 	@Override
 	public String toString() {
 
-		return new StringBuilder(ViewLocale.BUNDLE.getString(getClass().getSimpleName()))
+		return new StringBuilder(ViewMessage.getLocaleVegetableName(VegetableType.getVegetableTypeByValue(getClass().getSimpleName())))
 				.append(ViewMessageUtils.EQUALITY_SIGN).append(ViewMessageUtils.EMPTY_STR)
 				.append(ViewLocale.BUNDLE.getString(ViewMessage.CALORIES)).append(ViewMessageUtils.COLON)
 				.append(ViewMessageUtils.EMPTY_STR).append(getCalories()).append(ViewMessageUtils.EMPTY_STR)
