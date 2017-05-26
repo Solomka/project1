@@ -14,10 +14,16 @@ public abstract class Salad {
 	protected Map<Vegetable, Double> vegetables;
 
 	public Salad() {
-		vegetables = prepareSaladVegetables();		
+		vegetables = new HashMap<>();
+
+		addSaladVegetables();
+		prepareSaladVegetables();
+
 	}
 
-	protected abstract Map<Vegetable, Double> prepareSaladVegetables();
+	protected abstract Map<Vegetable, Double> addSaladVegetables();
+
+	protected abstract void prepareSaladVegetables();
 
 	public Map<Vegetable, Double> getVegetables() {
 		return vegetables;
@@ -88,6 +94,6 @@ public abstract class Salad {
 		} else if (!vegetables.equals(other.vegetables))
 			return false;
 		return true;
-	}	
+	}
 
 }

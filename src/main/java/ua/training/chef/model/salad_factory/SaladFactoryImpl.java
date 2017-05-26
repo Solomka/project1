@@ -11,6 +11,7 @@ public class SaladFactoryImpl implements SaladFactory {
 
 	@Override
 	public Salad createSalad(SaladType saladType) {
+
 		switch (saladType) {
 		case SPRING_SALAD:
 			return new SpringSalad();
