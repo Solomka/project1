@@ -1,11 +1,21 @@
 package ua.training.chef.model.salad;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import ua.training.chef.model.ingredients.Vegetable;
-import ua.training.chef.model.ingredients.VegetableType;
+import ua.training.chef.model.salad.ingredient.SaladIngredient;
+import ua.training.chef.model.vegetable.Carrot;
+import ua.training.chef.model.vegetable.Cucumber;
+import ua.training.chef.model.vegetable.Lettuce;
+import ua.training.chef.model.vegetable.Onion;
+import ua.training.chef.model.vegetable.Tomato;
+import ua.training.chef.model.vegetable.characteristic.CarrotSize;
+import ua.training.chef.model.vegetable.characteristic.CucumberType;
+import ua.training.chef.model.vegetable.characteristic.OnionType;
+import ua.training.chef.model.vegetable.characteristic.TomatoType;
 
 public class VitaminSalad extends Salad {
 
@@ -14,21 +24,17 @@ public class VitaminSalad extends Salad {
 	}
 
 	@Override
-	protected Map<Vegetable, Double> prepareSaladVegetables() {
-		Map<Vegetable, Double> vitaminSaladIngredients = new HashMap<>();
+	protected void addSaladVegetables() {
+		List<SaladIngredient> vitaminSaladVegetables = new ArrayList<>();
 
-		vitaminSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.CARROT)
-				.setSubType("Flaccus carrot").setCalories(65.2).setPrice(new BigDecimal(20)).build(), 50.0);
-		vitaminSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.CUCUMBER)
-				.setSubType("Ordinar cucumber").setCalories(15.5).setPrice(new BigDecimal(30)).build(), 60.0);
-		vitaminSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.LETTUCE)
-				.setSubType("Iceberg lettuce").setCalories(14.8).setPrice(new BigDecimal(80)).build(), 80.0);
-		vitaminSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.ONION)
-				.setSubType("Leek onion").setCalories(60.9).setPrice(new BigDecimal(100)).build(), 20.0);
-		vitaminSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.TOMATO)
-				.setSubType("Pink tomato").setCalories(17.7).setPrice(new BigDecimal(60)).build(), 80.0);
+		vitaminSaladVegetables.add(new SaladIngredient(new Carrot(65.2, new BigDecimal(20), CarrotSize.ORDINAR), 50.0));
+		vitaminSaladVegetables
+				.add(new SaladIngredient(new Cucumber(15.5, new BigDecimal(30), CucumberType.ORDINAR), 60.0));
+		vitaminSaladVegetables.add(new SaladIngredient(new Lettuce(14.8, new BigDecimal(80)), 80.0));
+		vitaminSaladVegetables.add(new SaladIngredient(new Onion(60.9, new BigDecimal(100), OnionType.LEEK), 20.0));
+		vitaminSaladVegetables.add(new SaladIngredient(new Tomato(17.7, new BigDecimal(60), TomatoType.CHERRY), 80.0));
 
-		return vitaminSaladIngredients;
+		vegetables = vitaminSaladVegetables;
 	}
 
 }

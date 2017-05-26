@@ -9,23 +9,25 @@ import ua.training.chef.model.salad.Salad;
 import ua.training.chef.model.salad.SaladType;
 import ua.training.chef.model.salad.SpringSalad;
 import ua.training.chef.model.salad.VitaminSalad;
-import ua.training.chef.service.SaladCreationService;
-import ua.training.chef.service.SaladCreationServiceImpl;
+import ua.training.chef.model.salad_factory.SaladFactory;
+import ua.training.chef.model.salad_factory.SaladFactoryImpl;
 
-public class SaladCreationServiceImplTest {
+public class SaladFactoryTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCreateSaladIllegalArgumentException() {
-		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
-		saladCreationService.createSalad(SaladType.getSaladTypeByValue(12));
+		SaladFactory saladFactory = new SaladFactoryImpl();
+		saladFactory.createSalad(SaladType.getSaladTypeByValue(12));
 	}
 
 	@Test
 	public void testCreateSaladSpringSalad() {
-		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
+		SaladFactory saladFactory = new SaladFactoryImpl();
 
 		SpringSalad expectedSalad = new SpringSalad();
-		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(1));
+		expectedSalad.prepareSaladVegetables();
+
+		Salad actualSalad = saladFactory.createSalad(SaladType.getSaladTypeByValue(1));
 
 		assertEquals(expectedSalad, actualSalad);
 
@@ -33,10 +35,12 @@ public class SaladCreationServiceImplTest {
 
 	@Test
 	public void testCreateSaladVitaminSalad() {
-		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
+		SaladFactory saladFactory = new SaladFactoryImpl();
 
 		VitaminSalad expectedSalad = new VitaminSalad();
-		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(2));
+		expectedSalad.prepareSaladVegetables();
+
+		Salad actualSalad = saladFactory.createSalad(SaladType.getSaladTypeByValue(2));
 
 		assertEquals(expectedSalad, actualSalad);
 
@@ -44,10 +48,12 @@ public class SaladCreationServiceImplTest {
 
 	@Test
 	public void testCreateSaladPeasantSalad() {
-		SaladCreationService saladCreationService = new SaladCreationServiceImpl();
+		SaladFactory saladFactory = new SaladFactoryImpl();
 
 		PeasantSalad expectedSalad = new PeasantSalad();
-		Salad actualSalad = saladCreationService.createSalad(SaladType.getSaladTypeByValue(3));
+		expectedSalad.prepareSaladVegetables();
+
+		Salad actualSalad = saladFactory.createSalad(SaladType.getSaladTypeByValue(3));
 
 		assertEquals(expectedSalad, actualSalad);
 

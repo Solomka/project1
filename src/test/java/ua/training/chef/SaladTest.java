@@ -3,26 +3,38 @@ package ua.training.chef;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import ua.training.chef.model.ingredients.Vegetable;
-import ua.training.chef.model.ingredients.VegetableType;
 import ua.training.chef.model.salad.Salad;
+import ua.training.chef.model.salad.ingredient.SaladIngredient;
+import ua.training.chef.model.vegetable.Lettuce;
+import ua.training.chef.model.vegetable.Olive;
+import ua.training.chef.model.vegetable.Tomato;
+import ua.training.chef.model.vegetable.characteristic.Color;
+import ua.training.chef.model.vegetable.characteristic.TomatoType;
 
 public class SaladTest {
 
-	private static final TestingSaladSubclass TEST_SALAD_SUBCLASS = new TestingSaladSubclass();
+	private static TestingSaladSubclass TEST_SALAD_SUBCLASS = new TestingSaladSubclass();
+
+	@BeforeClass
+	public static void prepareTestVegetables() {
+		TEST_SALAD_SUBCLASS.prepareSaladVegetables();
+	}
 
 	@Test
 	public void testGetSortedSaladVegetables() {
 		Salad salad = new TestingSaladSubclass();
 
-		Map<Vegetable, Double> expectedSaladVegetables = TEST_SALAD_SUBCLASS.getSortedSaladVegetables();
-		Map<Vegetable, Double> actualSaladVegetables = salad.getSortedSaladVegetables();
+		List<SaladIngredient> expectedSaladVegetables = TEST_SALAD_SUBCLASS.getSortedSaladVegetables();
+		List<SaladIngredient> actualSaladVegetables = salad.getSortedSaladVegetables();
 
 		assertEquals(expectedSaladVegetables, actualSaladVegetables);
 	}
@@ -34,7 +46,7 @@ public class SaladTest {
 		double minCaloriesValue = 14.7;
 		double maxCaloriesValue = 17.99;
 
-		Map<Vegetable, Double> saladVegetables = salad.getVegetablesInCaloriesRange(minCaloriesValue, maxCaloriesValue);
+		List<SaladIngredient> saladVegetables = salad.getVegetablesInCaloriesRange(minCaloriesValue, maxCaloriesValue);
 
 		boolean expected = true;
 		boolean actual = isVegetablesInRange(saladVegetables, minCaloriesValue, maxCaloriesValue);
@@ -62,12 +74,13 @@ public class SaladTest {
 		assertEquals(expected, actual);
 	}
 
-	private boolean isVegetablesInRange(Map<Vegetable, Double> saladVegetables, double minCaloriesValue,
+	private boolean isVegetablesInRange(List<SaladIngredient> saladVegetables, double minCaloriesValue,
 			double maxCaloriesValue) {
 		boolean isInRange = true;
 
-		for (Vegetable saladVegetable : saladVegetables.keySet()) {
-			if (saladVegetable.getCalories() >= minCaloriesValue && saladVegetable.getCalories() <= maxCaloriesValue) {
+		for (SaladIngredient saladVegetable : saladVegetables) {
+			if (saladVegetable.getVegetable().getCalories() >= minCaloriesValue
+					&& saladVegetable.getVegetable().getCalories() <= maxCaloriesValue) {
 			} else {
 				isInRange = false;
 				break;
@@ -80,29 +93,23 @@ public class SaladTest {
 	private static class TestingSaladSubclass extends Salad {
 
 		@Override
-		protected Map<Vegetable, Double> prepareSaladVegetables() {
-			Map<Vegetable, Double> testSaladIngredients = new HashMap<>();
+		protected void addSaladVegetables() {
+			List<SaladIngredient> testSaladIngredients = new ArrayList<>();
 
-			testSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.TOMATO)
-					.setSubType("Cherry tomato").setCalories(18).setPrice(new BigDecimal(80)).build(), 85.0);
-			testSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.OLIVE)
-					.setSubType("Black olive").setCalories(115).setPrice(new BigDecimal(180)).build(), 40.0);
-			testSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.LETTUCE)
-					.setSubType("Iceberg lettuce").setCalories(14.8).setPrice(new BigDecimal(80)).build(), 80.0);
+			testSaladIngredients.add(new SaladIngredient(new Tomato(18, new BigDecimal(80), TomatoType.CHERRY), 85.0));
+			testSaladIngredients.add(new SaladIngredient(new Olive(115, new BigDecimal(180), Color.BLACK), 40.0));
+			testSaladIngredients.add(new SaladIngredient(new Lettuce(14.8, new BigDecimal(80)), 80.0));
 
-			return testSaladIngredients;
+			vegetables = testSaladIngredients;
 		}
 
 		@Override
-		public Map<Vegetable, Double> getSortedSaladVegetables() {
-			Map<Vegetable, Double> sortedVegetables = new LinkedHashMap<>();
+		public List<SaladIngredient> getSortedSaladVegetables() {
+			List<SaladIngredient> sortedVegetables = new ArrayList<>();
 
-			sortedVegetables.put(new Vegetable.VegetableBuilder().setType(VegetableType.LETTUCE)
-					.setSubType("Iceberg lettuce").setCalories(14.8).setPrice(new BigDecimal(80)).build(), 80.0);
-			sortedVegetables.put(new Vegetable.VegetableBuilder().setType(VegetableType.TOMATO)
-					.setSubType("Cherry tomato").setCalories(18).setPrice(new BigDecimal(80)).build(), 85.0);
-			sortedVegetables.put(new Vegetable.VegetableBuilder().setType(VegetableType.OLIVE).setSubType("Black olive")
-					.setCalories(115).setPrice(new BigDecimal(180)).build(), 40.0);
+			sortedVegetables.add(new SaladIngredient(new Lettuce(14.8, new BigDecimal(80)), 80.0));
+			sortedVegetables.add(new SaladIngredient(new Tomato(18, new BigDecimal(80), TomatoType.CHERRY), 85.0));
+			sortedVegetables.add(new SaladIngredient(new Olive(115, new BigDecimal(180), Color.BLACK), 40.0));
 
 			return sortedVegetables;
 		}

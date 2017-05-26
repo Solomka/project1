@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ RegexContainerTest.class, SaladCreationServiceImplTest.class, SaladTest.class })
+@SuiteClasses({ RegexContainerTest.class, SaladCreationServiceTest.class, SaladFactoryTest.class, SaladTest.class })
 public class TestSuite {
 
 	/*
