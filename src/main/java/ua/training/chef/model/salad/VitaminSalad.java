@@ -2,9 +2,7 @@ package ua.training.chef.model.salad;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.model.vegetable.Carrot;
