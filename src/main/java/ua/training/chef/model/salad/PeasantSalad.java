@@ -1,11 +1,21 @@
 package ua.training.chef.model.salad;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import ua.training.chef.model.ingredient.Vegetable;
-import ua.training.chef.model.ingredient.VegetableType;
+import ua.training.chef.model.salad.ingredient.SaladIngredient;
+import ua.training.chef.model.vegetable.Cucumber;
+import ua.training.chef.model.vegetable.Lettuce;
+import ua.training.chef.model.vegetable.Onion;
+import ua.training.chef.model.vegetable.Radish;
+import ua.training.chef.model.vegetable.Tomato;
+import ua.training.chef.model.vegetable.characteristic.Color;
+import ua.training.chef.model.vegetable.characteristic.CucumberType;
+import ua.training.chef.model.vegetable.characteristic.OnionType;
+import ua.training.chef.model.vegetable.characteristic.TomatoType;
 
 public class PeasantSalad extends Salad {
 
@@ -14,21 +24,17 @@ public class PeasantSalad extends Salad {
 	}
 
 	@Override
-	protected Map<Vegetable, Double> prepareSaladVegetables() {
-		Map<Vegetable, Double> peasantSaladIngredients = new HashMap<>();
+	protected void addSaladVegetables() {
+		List<SaladIngredient> peasantSaladVegetables = new ArrayList<>();
 
-		peasantSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.RADISH)
-				.setSubType("Red radish").setCalories(15.8).setPrice(new BigDecimal(60)).build(), 100.0);
-		peasantSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.LETTUCE)
-				.setSubType("Seed lettuce").setCalories(14).setPrice(new BigDecimal(75)).build(), 60.0);
-		peasantSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.ONION)
-				.setSubType("White onion").setCalories(65).setPrice(new BigDecimal(10)).build(), 25.0);
-		peasantSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.CUCUMBER)
-				.setSubType("Ordinar cucumber").setCalories(15.5).setPrice(new BigDecimal(30)).build(), 50.0);
-		peasantSaladIngredients.put(new Vegetable.VegetableBuilder().setType(VegetableType.TOMATO)
-				.setSubType("Red tomato").setCalories(17).setPrice(new BigDecimal(55)).build(), 50.0);
+		peasantSaladVegetables.add(new SaladIngredient(new Radish(15.8, new BigDecimal(60), Color.RED), 100.0));
+		peasantSaladVegetables.add(new SaladIngredient(new Lettuce(14, new BigDecimal(75)), 60.0));
+		peasantSaladVegetables.add(new SaladIngredient(new Onion(65, new BigDecimal(10), OnionType.ORIDNAR), 25.0));
+		peasantSaladVegetables
+				.add(new SaladIngredient(new Cucumber(15.5, new BigDecimal(30), CucumberType.ORDINAR), 50.0));
+		peasantSaladVegetables.add(new SaladIngredient(new Tomato(17, new BigDecimal(55), TomatoType.ORDINAR), 50.0));
 
-		return peasantSaladIngredients;
+		vegetables = peasantSaladVegetables;
 	}
 
 }

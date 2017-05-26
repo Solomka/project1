@@ -2,43 +2,51 @@ package ua.training.chef.model.salad;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import ua.training.chef.constants.GlobalConstants;
-import ua.training.chef.model.ingredient.Vegetable;
+import ua.training.chef.model.salad.ingredient.SaladIngredient;
 
 public abstract class Salad {
 
-	protected Map<Vegetable, Double> vegetables;
+	protected List<SaladIngredient> vegetables;
 
 	public Salad() {
-		vegetables = new HashMap<>();
+		vegetables = new ArrayList<>();
 
 		addSaladVegetables();
-		prepareSaladVegetables();
 
 	}
 
-	protected abstract Map<Vegetable, Double> addSaladVegetables();
+	protected abstract void addSaladVegetables();
 
-	protected abstract void prepareSaladVegetables();
+	public void prepareSaladVegetables() {
+		for (SaladIngredient vegetable : vegetables) {
+			vegetable.getVegetable().prepareForSalad();
+		}
+	}
 
-	public Map<Vegetable, Double> getVegetables() {
+	public List<SaladIngredient> getVegetables() {
 		return vegetables;
 	}
 
-	public Map<Vegetable, Double> getSortedSaladVegetables() {
-		return new TreeMap<>(vegetables);
+	public List<SaladIngredient> getSortedSaladVegetables() {
+
+		List<SaladIngredient> sortedList = new ArrayList<>(vegetables);
+		Collections.sort(sortedList);
+
+		return sortedList;
 	}
 
-	public Map<Vegetable, Double> getVegetablesInCaloriesRange(double minCaloriesValue, double maxCaloriesValue) {
-		Map<Vegetable, Double> vegetablesInCaloriesRange = new HashMap<>();
+	public List<SaladIngredient> getVegetablesInCaloriesRange(double minCaloriesValue, double maxCaloriesValue) {
+		List<SaladIngredient> vegetablesInCaloriesRange = new ArrayList<>();
 
-		for (Vegetable vegetable : vegetables.keySet()) {
-			if (vegetable.getCalories() >= minCaloriesValue && vegetable.getCalories() <= maxCaloriesValue) {
-				vegetablesInCaloriesRange.put(vegetable, vegetables.get(vegetable));
+		for (SaladIngredient vegetable : vegetables) {
+			if (vegetable.getVegetable().getCalories() >= minCaloriesValue
+					&& vegetable.getVegetable().getCalories() <= maxCaloriesValue) {
+				vegetablesInCaloriesRange.add(vegetable);
 			}
 		}
 
@@ -48,8 +56,8 @@ public abstract class Salad {
 	public double getSaladCalories() {
 		double generalSaladCalories = 0.0;
 
-		for (Vegetable vegetable : vegetables.keySet()) {
-			generalSaladCalories += vegetable.calculateCaloriesPerWeight(vegetables.get(vegetable));
+		for (SaladIngredient vegetable : vegetables) {
+			generalSaladCalories += vegetable.getVegetable().calculateCaloriesPerWeight(vegetable.getWeight());
 		}
 
 		return Math.floor(generalSaladCalories * GlobalConstants.TWO_DIGITS_AFTER_DECIMAL_POINT)
@@ -59,8 +67,9 @@ public abstract class Salad {
 	public BigDecimal getSaladPrice() {
 		BigDecimal generalSaladPrice = BigDecimal.ZERO;
 
-		for (Vegetable vegetable : vegetables.keySet()) {
-			generalSaladPrice = generalSaladPrice.add(vegetable.calculatePricePerWeight(vegetables.get(vegetable)));
+		for (SaladIngredient vegetable : vegetables) {
+			generalSaladPrice = generalSaladPrice
+					.add(vegetable.getVegetable().calculatePricePerWeight(vegetable.getWeight()));
 		}
 
 		BigDecimal restaurantExtra = generalSaladPrice.multiply(GlobalConstants.SALAD_EXTRA_PRICE,

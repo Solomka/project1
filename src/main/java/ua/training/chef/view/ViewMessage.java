@@ -22,8 +22,7 @@ public interface ViewMessage {
 	String SALAD_PRICE = "chef.input.generalSaladPrice";
 	String VEGETABLES = "chef.input.vegetables";
 	String SORTED_VEGETABLES = "chef.input.sortedVegetables";
-	String DRESSINGS = "chef.input.dressings";
-
+	
 	String VEGETABLES_SEARCH_MESSAGE = "chef.input.searchCondition";
 	String MIN_CALORIC_VALUE = "chef.input.minCaloriesValue";
 	String MAX_CALORIC_VALUE = "chef.input.maxCaloriesValue";
@@ -36,20 +35,23 @@ public interface ViewMessage {
 	String SALAD_FACTORY_ERROR_MSG = "Such salad is not served in our salad restaurant";
 	String SALAD_TYPE_VALUE_ERROR_MSG = "Salad type with such value doesn't exist";
 
-	String TYPE = "chef.input.type";
-	String SUBTYPE = "chef.input.sybtype";
 	String CALORIES = "chef.input.calories";
 	String PRICE = "chef.input.price";
-	String FAT = "chef.input.fat";
 	String WEIGHT = "chef.input.weight";
+	String TYPE = "chef.input.type";
+	String SIZE = "chef.input.size";
+	String IS_GRATED = "chef.input.isGrated";
+	String IS_CUT = "chef.input.isCut";
+	String COLOR = "chef.input.color";
+	String IS_CUTABLE = "chef.input.isCutable";
+	String IS_PEELED = "chef.input.isPeeled";
+	
+	
 	String PER = "per";
 	String MEASURE = "g";
 
-	/* Vegetables/ Ingredients */
-	String OIL = "chef.input.oil";
-	String VINEGAR = "chef.input.vinegar";
-	String SOURCREAM = "chef.input.sourcream";
-
+	/* Vegetables */
+	
 	String CARROT = "chef.input.carrot";
 	String CUCUMBER = "chef.input.cucumber";
 	String LETTUCE = "chef.input.lettuce";

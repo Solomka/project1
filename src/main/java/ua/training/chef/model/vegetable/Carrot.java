@@ -1,8 +1,11 @@
-package ua.training.chef.model.ingredient;
+package ua.training.chef.model.vegetable;
 
 import java.math.BigDecimal;
 
-import ua.training.chef.model.ingredient.characteristic.CarrotSize;
+import ua.training.chef.model.vegetable.characteristic.CarrotSize;
+import ua.training.chef.view.ViewLocale;
+import ua.training.chef.view.ViewMessage;
+import ua.training.chef.view.utils.ViewMessageUtils;
 
 public class Carrot extends Vegetable {
 
@@ -17,7 +20,7 @@ public class Carrot extends Vegetable {
 	}
 
 	@Override
-	protected void prepareForSalad() {
+	public void prepareForSalad() {
 		if (size == CarrotSize.ORDINAR) {
 			isGrated = true;
 		}
@@ -58,6 +61,16 @@ public class Carrot extends Vegetable {
 		if (size != other.size)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+
+		return new StringBuilder(super.toString()).append(ViewMessageUtils.COMMA).append(ViewMessageUtils.EMPTY_STR)
+				.append(ViewLocale.BUNDLE.getString(ViewMessage.SIZE)).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(getSize()).append(ViewMessageUtils.COMMA)
+				.append(ViewMessageUtils.EMPTY_STR).append(ViewLocale.BUNDLE.getString(ViewMessage.IS_GRATED))
+				.append(ViewMessageUtils.COLON).append(ViewMessageUtils.EMPTY_STR).append(isGrated()).toString();
 	}
 
 }

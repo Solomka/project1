@@ -1,8 +1,11 @@
-package ua.training.chef.model.ingredient;
+package ua.training.chef.model.vegetable;
 
 import java.math.BigDecimal;
 
-import ua.training.chef.model.ingredient.characteristic.OnionType;
+import ua.training.chef.model.vegetable.characteristic.OnionType;
+import ua.training.chef.view.ViewLocale;
+import ua.training.chef.view.ViewMessage;
+import ua.training.chef.view.utils.ViewMessageUtils;
 
 public class Onion extends Vegetable {
 
@@ -18,7 +21,7 @@ public class Onion extends Vegetable {
 	}
 
 	@Override
-	protected void prepareForSalad() {
+	public void prepareForSalad() {
 		setCut();
 		setPeeled();
 	}
@@ -75,6 +78,19 @@ public class Onion extends Vegetable {
 		if (type != other.type)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+
+		return new StringBuilder(super.toString()).append(ViewMessageUtils.COMMA).append(ViewMessageUtils.EMPTY_STR)
+				.append(ViewLocale.BUNDLE.getString(ViewMessage.TYPE)).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(getType()).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(ViewLocale.BUNDLE.getString(ViewMessage.IS_CUT))
+				.append(ViewMessageUtils.COLON).append(ViewMessageUtils.EMPTY_STR).append(isCut())
+				.append(ViewMessageUtils.COMMA).append(ViewMessageUtils.EMPTY_STR)
+				.append(ViewLocale.BUNDLE.getString(ViewMessage.IS_PEELED)).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(isPeeled()).toString();
 	}
 
 }

@@ -1,11 +1,12 @@
 package ua.training.chef.view;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-import ua.training.chef.model.ingredient.Vegetable;
 import ua.training.chef.model.salad.Salad;
+import ua.training.chef.model.salad.ingredient.SaladIngredient;
 import ua.training.chef.view.utils.ViewMessageUtils;
 
 /**
@@ -65,15 +66,11 @@ public class View {
 		printMessage(ViewLocale.BUNDLE.getString(ViewMessage.SALAD_PRICE), saladPrice.toString());
 	}
 
-	public void printSaladVegetables(String message, Map<Vegetable, Double> saladVegetables) {
+	public void printSaladVegetables(String message, List<SaladIngredient> saladVegetables) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		for (Vegetable vegetable : saladVegetables.keySet()) {
-			stringBuilder.append(ViewMessageUtils.LEFT_PARENTHESIS).append(vegetable.toString())
-					.append(ViewMessageUtils.VERT_LINA).append(ViewLocale.BUNDLE.getString(ViewMessage.WEIGHT))
-					.append(ViewMessageUtils.COLON).append(saladVegetables.get(vegetable))
-					.append(ViewMessageUtils.EMPTY_STR).append(ViewMessage.MEASURE).append(ViewMessageUtils.EMPTY_STR)
-					.append(ViewMessageUtils.RIGHT_PARANTHESIS).append(ViewMessageUtils.NEW_LINE);
+		for (SaladIngredient vegetable : saladVegetables) {
+			stringBuilder.append(vegetable.toString()).append(ViewMessageUtils.NEW_LINE);
 		}
 
 		printMessage(message, ViewMessageUtils.NEW_LINE, stringBuilder.toString());

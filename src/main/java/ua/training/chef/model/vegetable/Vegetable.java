@@ -1,4 +1,4 @@
-package ua.training.chef.model.ingredient;
+package ua.training.chef.model.vegetable;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -18,7 +18,7 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 		this.price = price;
 	}
 
-	protected abstract void prepareForSalad();
+	public abstract void prepareForSalad();
 
 	public double getCalories() {
 		return calories;
@@ -90,10 +90,10 @@ public abstract class Vegetable implements Comparable<Vegetable> {
 	@Override
 	public String toString() {
 
-		return new StringBuilder(getClass().getSimpleName()).append(ViewMessageUtils.EQUALITY_SIGN)
-				.append(ViewMessageUtils.EMPTY_STR).append(ViewLocale.BUNDLE.getString(ViewMessage.CALORIES))
-				.append(ViewMessageUtils.COLON).append(ViewMessageUtils.EMPTY_STR).append(getCalories())
-				.append(ViewMessageUtils.EMPTY_STR)
+		return new StringBuilder(ViewLocale.BUNDLE.getString(getClass().getSimpleName()))
+				.append(ViewMessageUtils.EQUALITY_SIGN).append(ViewMessageUtils.EMPTY_STR)
+				.append(ViewLocale.BUNDLE.getString(ViewMessage.CALORIES)).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(getCalories()).append(ViewMessageUtils.EMPTY_STR)
 				.append(ViewMessage.getUnitOfMeasurement(GlobalConstants.CALORIC_VALUE_GRAM_MEASURE))
 				.append(ViewMessageUtils.COMMA).append(ViewMessageUtils.EMPTY_STR)
 				.append(ViewLocale.BUNDLE.getString(ViewMessage.PRICE)).append(ViewMessageUtils.COLON)

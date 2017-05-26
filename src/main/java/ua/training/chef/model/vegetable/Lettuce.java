@@ -1,6 +1,10 @@
-package ua.training.chef.model.ingredient;
+package ua.training.chef.model.vegetable;
 
 import java.math.BigDecimal;
+
+import ua.training.chef.view.ViewLocale;
+import ua.training.chef.view.ViewMessage;
+import ua.training.chef.view.utils.ViewMessageUtils;
 
 public class Lettuce extends Vegetable {
 
@@ -10,13 +14,13 @@ public class Lettuce extends Vegetable {
 		super(calories, price);
 	}
 
-	public boolean isCut() {
-		return isCut;
+	@Override
+	public void prepareForSalad() {
+		isCut = true;
 	}
 
-	@Override
-	protected void prepareForSalad() {
-		isCut = true;
+	public boolean isCut() {
+		return isCut;
 	}
 
 	@Override
@@ -39,5 +43,13 @@ public class Lettuce extends Vegetable {
 		if (isCut != other.isCut)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+
+		return new StringBuilder(super.toString()).append(ViewMessageUtils.COMMA).append(ViewMessageUtils.EMPTY_STR)
+				.append(ViewLocale.BUNDLE.getString(ViewMessage.IS_PEELED)).append(ViewMessageUtils.COLON)
+				.append(ViewMessageUtils.EMPTY_STR).append(isCut()).toString();
 	}
 }

@@ -12,17 +12,24 @@ public class SaladFactoryImpl implements SaladFactory {
 	@Override
 	public Salad createSalad(SaladType saladType) {
 
+		Salad salad;
+
 		switch (saladType) {
 		case SPRING_SALAD:
-			return new SpringSalad();
+			salad = new SpringSalad();
+			break;
 		case VITAMIN_SALAD:
-			return new VitaminSalad();
+			salad = new VitaminSalad();
+			break;
 		case PEASANT_SALAD:
-			return new PeasantSalad();
+			salad = new PeasantSalad();
+			break;
 		default:
 			throw new IllegalArgumentException(ViewMessage.SALAD_FACTORY_ERROR_MSG);
-
 		}
+		salad.prepareSaladVegetables();
+
+		return salad;
 	}
 
 }
