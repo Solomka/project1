@@ -10,7 +10,7 @@ public class SaladCreationServiceImpl implements SaladCreationService {
 	private SaladFactory saladFactory;
 
 	public SaladCreationServiceImpl() {
-		this.saladFactory = new SaladFactoryImpl();
+		this.saladFactory = SaladFactoryImpl.getSaladFactoryImplInstance();
 	}
 
 	public Salad createSalad(SaladType saladType) {

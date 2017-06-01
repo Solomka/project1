@@ -16,13 +16,13 @@ public class SaladFactoryTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCreateSaladIllegalArgumentException() {
-		SaladFactory saladFactory = new SaladFactoryImpl();
+		SaladFactory saladFactory = SaladFactoryImpl.getSaladFactoryImplInstance();
 		saladFactory.createSalad(SaladType.getSaladTypeByValue(12));
 	}
 
 	@Test
 	public void testCreateSaladSpringSalad() {
-		SaladFactory saladFactory = new SaladFactoryImpl();
+		SaladFactory saladFactory = SaladFactoryImpl.getSaladFactoryImplInstance();
 
 		SpringSalad expectedSalad = new SpringSalad();
 		expectedSalad.prepareSaladVegetables();
@@ -35,7 +35,7 @@ public class SaladFactoryTest {
 
 	@Test
 	public void testCreateSaladVitaminSalad() {
-		SaladFactory saladFactory = new SaladFactoryImpl();
+		SaladFactory saladFactory = SaladFactoryImpl.getSaladFactoryImplInstance();
 
 		VitaminSalad expectedSalad = new VitaminSalad();
 		expectedSalad.prepareSaladVegetables();
@@ -48,7 +48,7 @@ public class SaladFactoryTest {
 
 	@Test
 	public void testCreateSaladPeasantSalad() {
-		SaladFactory saladFactory = new SaladFactoryImpl();
+		SaladFactory saladFactory = SaladFactoryImpl.getSaladFactoryImplInstance();
 
 		PeasantSalad expectedSalad = new PeasantSalad();
 		expectedSalad.prepareSaladVegetables();

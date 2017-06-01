@@ -9,6 +9,19 @@ import ua.training.chef.view.ViewMessage;
 
 public class SaladFactoryImpl implements SaladFactory {
 
+	private static SaladFactoryImpl saladFactoryImplInstance;
+
+	private SaladFactoryImpl() {
+
+	}
+
+	public static SaladFactoryImpl getSaladFactoryImplInstance() {
+		if (saladFactoryImplInstance == null) {
+			saladFactoryImplInstance = new SaladFactoryImpl();
+		}
+		return saladFactoryImplInstance;
+	}
+
 	@Override
 	public Salad createSalad(SaladType saladType) {
 
